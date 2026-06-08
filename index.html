@@ -133,6 +133,68 @@ header h1 em{font-style:italic;color:var(--am);}
 .empty{text-align:center;padding:40px 20px;color:var(--gr);}
 .empty .e-ico{font-size:40px;margin-bottom:10px;}
 .empty p{font-size:14px;}
+
+/* DARK MODE */
+body.dark {
+  --cr:#1a2420;
+  --bl:#242f2a;
+  --tx:#e8f0eb;
+  --gr:#8aab96;
+  --vc:#2a3d32;
+  --sh:0 4px 20px rgba(0,0,0,.35);
+}
+body.dark header { background:#1a3028; }
+body.dark .tabs { background:#242f2a; border-bottom-color:#2a3d32; }
+body.dark .tab { color:#8aab96; }
+body.dark .tab.on { color:#6fcf8e; border-bottom-color:#6fcf8e; }
+body.dark .dia-card, body.dark .cat-blk, body.dark .compra-top,
+body.dark .prog-bar, body.dark .search-bar, body.dark .rec-card { background:#242f2a; }
+body.dark .dia-head { background:#1a3028; }
+body.dark .comida { border-bottom-color:#2a3d32; }
+body.dark .comida.cr:hover { background:#2a3d32; }
+body.dark .c-h { background:#2a3d32; color:#a8d4b4; }
+body.dark .c-t { color:#6fcf8e; }
+body.dark .c-n { color:#e8f0eb; }
+body.dark .c-i { color:#f0a070; }
+body.dark .cat-tit { background:#2a3d32; color:#6fcf8e; }
+body.dark .ci { border-bottom-color:#2a3d32; }
+body.dark .ci:hover { background:#2a3d32; }
+body.dark .ci-n { color:#e8f0eb; }
+body.dark .ci-c { color:#8aab96; }
+body.dark .ci-box { border-color:#6fcf8e; }
+body.dark .ci.done .ci-box { background:#6fcf8e; color:#1a2420; }
+body.dark .prog-track { background:#2a3d32; }
+body.dark .prog-fill { background:#6fcf8e; }
+body.dark .prog-label { color:#8aab96; }
+body.dark .search-bar { border-color:#2a3d32; }
+body.dark .search-bar input { color:#e8f0eb; }
+body.dark .search-bar input::placeholder { color:#8aab96; }
+body.dark .ftag { background:#242f2a; border-color:#2a3d32; color:#8aab96; }
+body.dark .ftag.on { background:#1a3028; color:#6fcf8e; border-color:#6fcf8e; }
+body.dark .rec-card:hover { background:#2a3d32; }
+body.dark .rec-nom { color:#e8f0eb; }
+body.dark .rec-sub { color:#8aab96; }
+body.dark .rec-arr { color:#8aab96; }
+body.dark .tag-dieta { background:#1a3028; color:#6fcf8e; }
+body.dark .tag-finde { background:#3d2a1a; color:#f0a070; }
+body.dark .tag-recetario { background:#2a1a3d; color:#c4a0f0; }
+body.dark .badge-finde { background:#3d2a1a; color:#f0a070; }
+body.dark .modal { background:#242f2a; }
+body.dark .m-tit { color:#e8f0eb; }
+body.dark .m-x { background:#2a3d32; color:#6fcf8e; }
+body.dark .m-sec h4 { color:#8aab96; }
+body.dark .ing { border-bottom-color:#2a3d32; color:#e8f0eb; }
+body.dark .ing-c { color:#6fcf8e; }
+body.dark .paso { border-bottom-color:#2a3d32; color:#e8f0eb; }
+body.dark .paso::before { background:#1a3028; }
+body.dark .chip { background:#3d2a1a; color:#f0a070; }
+body.dark .compra-top h2 { color:#e8f0eb; }
+body.dark .badge-sem { background:#1a3028; }
+body.dark .overlay { background:rgba(0,0,0,.75); }
+body.dark .m-handle { background:#2a3d32; }
+body.dark .dia-nom { color:#e8f0eb; }
+body.dark .empty { color:#8aab96; }
+
 </style>
 </head>
 <body>
@@ -143,6 +205,7 @@ header h1 em{font-style:italic;color:var(--am);}
     <button class="hbtn on" id="btnM" onclick="nav('menu')">📅</button>
     <button class="hbtn" id="btnC" onclick="nav('compra')">🛒</button>
     <button class="hbtn" id="btnR" onclick="nav('recetario')">📖</button>
+    <button class="hbtn" id="btnDark" onclick="toggleDark()" title="Modo noche">🌙</button>
   </div>
 </header>
 
@@ -842,7 +905,31 @@ function toast(msg) {
   setTimeout(function(){ t.className='toast'; }, 2500);
 }
 
+// ── MODO NOCHE ──────────────────────────────────────────────
+function toggleDark() {
+  var body = document.body;
+  var btn = document.getElementById('btnDark');
+  if (body.classList.contains('dark')) {
+    body.classList.remove('dark');
+    btn.textContent = '🌙';
+    try { localStorage.setItem('darkMode','0'); } catch(e){}
+  } else {
+    body.classList.add('dark');
+    btn.textContent = '☀️';
+    try { localStorage.setItem('darkMode','1'); } catch(e){}
+  }
+}
+function initDark() {
+  try {
+    if (localStorage.getItem('darkMode') === '1') {
+      document.body.classList.add('dark');
+      document.getElementById('btnDark').textContent = '☀️';
+    }
+  } catch(e){}
+}
+
 // ── INIT ──────────────────────────────────────────────────────
+initDark();
 generarMenuSemana();
 renderTabs(); renderDia(0); renderCompra();
 renderFiltros(); renderRecetario();
