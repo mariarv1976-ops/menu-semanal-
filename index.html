@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Menú">
+  <meta name="theme-color" content="#3a7d5a">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Menú Semanal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap');
+:root {
+  --verde:#3a7d5a; --verde-c:#e8f4ed; --amarillo:#f0c84b;
+  --naranja:#e8824a; --crema:#faf7f2; --texto:#1a2e22;
+  --gris:#8a9e93; --blanco:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--crema);color:var(--texto);min-height:100vh;}
+header{background:var(--verde);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.15);}
+header h1{font-family:'Fraunces',serif;font-weight:300;font-size:21px;color:#fff;}
+header h1 em{font-style:italic;color:var(--amarillo);}
+.hbtns{display:flex;gap:8px;}
+.hbtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:6px 14px;font-size:13px;cursor:pointer;transition:.2s;}
+.hbtn:hover{background:rgba(255,255,255,.25);}
+.hbtn.on{background:var(--amarillo);color:var(--texto);border-color:var(--amarillo);font-weight:500;}
+.tabs{display:flex;background:#fff;border-bottom:2px solid var(--verde-c);padding:0 12px;gap:2px;overflow-x:auto;}
+.tab{padding:11px 14px;font-size:13px;font-weight:500;color:var(--gris);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:.2s;}
+.tab.on{color:var(--verde);border-bottom-color:var(--verde);}
+.main{padding:14px;max-width:480px;margin:0 auto;}
+.vista{display:none;} .vista.on{display:block;}
+/* dia card */
+.dia-card{background:#fff;border-radius:16px;margin-bottom:12px;overflow:hidden;box-shadow:0 4px 20px rgba(26,46,34,.08);}
+.dia-head{background:var(--verde);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
+.dia-nom{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:#fff;}
+.dia-num{background:var(--amarillo);color:var(--texto);border-radius:50%;width:27px;height:27px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+.comida{display:flex;align-items:center;padding:10px 14px;border-bottom:1px solid var(--verde-c);gap:10px;cursor:default;transition:.15s;}
+.comida:last-child{border-bottom:none;}
+.comida.tiene-receta{cursor:pointer;}
+.comida.tiene-receta:hover{background:var(--verde-c);}
+.c-hora{font-size:11px;color:var(--gris);font-weight:500;min-width:40px;text-align:center;background:var(--verde-c);border-radius:7px;padding:3px 4px;}
+.c-tipo{font-size:10px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.5px;min-width:70px;}
+.c-nom{font-size:13px;flex:1;line-height:1.3;}
+.c-ico{font-size:15px;color:var(--naranja);}
+/* compra */
+.compra-top{background:#fff;border-radius:16px;padding:14px 16px;margin-bottom:10px;box-shadow:0 4px 20px rgba(26,46,34,.08);display:flex;align-items:center;justify-content:space-between;}
+.compra-top h2{font-family:'Fraunces',serif;font-size:19px;font-weight:600;}
+.badge{background:var(--verde);color:#fff;border-radius:20px;padding:4px 12px;font-size:12px;}
+.cat-blk{background:#fff;border-radius:14px;margin-bottom:8px;overflow:hidden;box-shadow:0 4px 20px rgba(26,46,34,.08);}
+.cat-tit{background:var(--verde-c);padding:9px 14px;font-size:11px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:.7px;}
+.ci{display:flex;align-items:center;padding:10px 14px;border-bottom:1px solid var(--verde-c);gap:10px;cursor:pointer;transition:.15s;}
+.ci:last-child{border-bottom:none;}
+.ci.done{opacity:.42;}
+.ci.done .ci-nom{text-decoration:line-through;}
+.ci-box{width:21px;height:21px;border:2px solid var(--verde);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:.15s;}
+.ci.done .ci-box{background:var(--verde);color:#fff;}
+.ci-nom{flex:1;font-size:13.5px;}
+.ci-cant{font-size:12px;color:var(--gris);font-weight:500;}
+/* modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,46,34,.6);z-index:200;align-items:flex-end;justify-content:center;}
+.overlay.on{display:flex;}
+.modal{background:#fff;border-radius:22px 22px 0 0;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;padding-bottom:30px;animation:up .3s ease;}
+@keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.m-handle{width:38px;height:4px;background:#ddd;border-radius:2px;margin:11px auto 0;}
+.m-head{padding:14px 18px 11px;border-bottom:1px solid var(--verde-c);display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+.m-tit{font-family:'Fraunces',serif;font-size:19px;font-weight:600;flex:1;line-height:1.25;}
+.m-x{background:var(--verde-c);border:none;border-radius:50%;width:30px;height:30px;font-size:16px;cursor:pointer;color:var(--verde);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.m-body{padding:14px 18px;}
+.m-sec{margin-bottom:18px;}
+.m-sec h4{font-size:11px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;}
+.ing{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--verde-c);font-size:13px;}
+.ing:last-child{border-bottom:none;}
+.ing-c{font-weight:600;color:var(--verde);text-align:right;min-width:90px;}
+.pasos{counter-reset:p;}
+.paso{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--verde-c);font-size:13px;line-height:1.5;counter-increment:p;}
+.paso:last-child{border-bottom:none;}
+.paso::before{content:counter(p);position:absolute;left:0;top:9px;background:var(--verde);color:#fff;width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
+.chips{display:flex;flex-wrap:wrap;gap:5px;}
+.chip{background:#fff3e0;color:#b85c00;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:500;}
+/* fab */
+.fab{position:fixed;bottom:22px;right:20px;background:var(--naranja);color:#fff;border:none;border-radius:26px;padding:13px 20px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(232,130,74,.4);display:flex;align-items:center;gap:7px;z-index:150;transition:.2s;}
+.fab:hover{transform:translateY(-2px);}
+.toast{position:fixed;top:76px;left:50%;transform:translateX(-50%);background:var(--texto);color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+.toast.on{opacity:1;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Menú <em>semanal</em></h1>
+  <div class="hbtns">
+    <button class="hbtn on" id="btnM" onclick="showVista('menu')">📅 Menú</button>
+    <button class="hbtn" id="btnC" onclick="showVista('compra')">🛒 Compra</button>
+  </div>
+</header>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="main">
+  <div class="vista on" id="vistaMenu"></div>
+  <div class="vista" id="vistaCompra">
+    <div class="compra-top">
+      <h2>Lista de la compra</h2>
+      <span class="badge" id="badgeSem">Semana 1</span>
+    </div>
+    <div id="listaCompra"></div>
+  </div>
+</div>
+
+<button class="fab" onclick="nuevaSemana()">🔀 Nueva semana</button>
+
+<div class="overlay" id="overlay" onclick="cerrarOverlay(event)">
+  <div class="modal" id="modal">
+    <div class="m-handle"></div>
+    <div class="m-head">
+      <div class="m-tit" id="mTit"></div>
+      <button class="m-x" onclick="cerrarModal()">✕</button>
+    </div>
+    <div class="m-body" id="mBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var DIAS = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+var semana = 1;
+var orden = [0,1,2,3,4,5,6];
+var diaIdx = 0;
+var checks = {};
+
+var RECETAS = {
+  "Ensalada de garbanzos mixta": {
+    ing:[["Aceite de oliva","5 g"],["Cebolla","30 g (1 trozo)"],["Lechuga","40 g (2 hojas)"],["Tomate crudo","75 g (4 rodajas)"],["Zanahoria","40 g (1 uds pequeña)"],["Garbanzos cocidos","150 g"]],
+    pasos:["Escurrir los garbanzos, pasarlos bajo agua fría y volcarlos a una fuente.","Añadir la zanahoria, tomate, lechuga y cebolla troceadas. Mezclar bien.","Aliñar con aceite de oliva en crudo."],
+    alerg:""
+  },
+  "Pechuga de pavo a la plancha con berenjena": {
+    ing:[["Aceite de oliva","8 g"],["Berenjena","150 g (½ grande)"],["Pavo, pechuga fresca","150 g (1 filete)"]],
+    pasos:["Asar a la plancha el filete de pechuga de pavo.","En una sartén con el aceite asar la berenjena cortada en rodajas.","Emplatar el pavo con la berenjena asada."],
+    alerg:""
+  },
+  "Pollo asado en su jugo": {
+    ing:[["Aceite de oliva","10 g (1 cda)"],["Ajo","10 g (2 dientes)"],["Pollo muslo/contramuslo","270 g"],["Laurel","al gusto"],["Vino de Jerez","50 g"]],
+    pasos:["En fuente de horno colocar el muslo sin piel, sazonado. Agregar aceite, laurel, ajos y regar con el vino.","Horno a 190ºC. A los 20 min darle la vuelta y regar con los jugos.","Pasados 20 min más, dar la vuelta y asar 15 min más.","Emplatar y aliñar con el jugo del fondo."],
+    alerg:"Sulfitos"
+  },
+  "Ensalada de tomate, judías verdes, espárragos y queso fresco": {
+    ing:[["Tomate crudo","180 g (1 mediano)"],["Judía verde","100 g (5 vainas)"],["Espárrago","100 g (5 uds)"],["Queso Burgos 0% MG","110 g (1½ tarrina)"],["Aceite de oliva","10 g (1 cda)"]],
+    pasos:["Lavar y cortar espárragos y judías. Escaldar 5 min en agua hirviendo. Escurrir y reservar.","Trocear el tomate y mezclar con los espárragos y judías templadas.","Emplatar y añadir el queso fresco en dados.","Aliñar con aceite de oliva."],
+    alerg:"Lácteos"
+  },
+  "Hamburguesa de pollo con champiñones": {
+    ing:[["Aceite de oliva","5 g"],["Champiñón","100 g (5 uds medianas)"],["Hamburguesa de pollo","150 g (1½ uds)"]],
+    pasos:["Asar a la plancha la hamburguesa de pollo.","Saltear el champiñón cortado en cuartos con el aceite.","Emplatar la hamburguesa con el champiñón."],
+    alerg:""
+  },
+  "Sepia con pesto de guisantes": {
+    ing:[["Sepia","125 g"],["Queso parmesano","15 g"],["Aceite de oliva","8 g"],["Guisantes congelados","50 g"],["Pistacho","5 g"],["Ajo","3 g (½ diente)"],["Pimienta negra","al gusto"],["Albahaca","5 g"],["Limón","60 g (4 rodajas)"]],
+    pasos:["Cocer los guisantes 8 min en agua hirviendo. Escurrir.","Triturar guisantes, parmesano, pistachos, ajo, albahaca, aceite, pimienta y zumo de medio limón.","Asar la sepia limpia en sartén caliente, 2 min por cada lado.","Emplatar el pesto de base y colocar la sepia encima."],
+    alerg:"Crustáceos, lácteos, pescado, frutos secos, moluscos"
+  },
+  "Bacalao al ajoarriero": {
+    ing:[["Pimiento rojo","50 g"],["Pimiento verde","50 g"],["Aceite de oliva","10 g (1 cda)"],["Ajo","5 g (1 diente)"],["Cebolla blanca","50 g"],["Bacalao salado remojado","150 g"],["Tomate en puré","45 g"]],
+    pasos:["Poner el bacalao a remojo la noche anterior.","Pochar los pimientos picados con el ajo y la cebolla.","Añadir la salsa de tomate y cocinar unos minutos.","Dorar el bacalao, sacarlo y romperlo en lascas.","Incorporar el bacalao al sofrito y cocinar a fuego suave 10 min."],
+    alerg:"Pescado"
+  },
+  "Ensalada mixta con atún y maíz": {
+    ing:[["Aceite de oliva","10 g"],["Cebolleta","70 g (½ uds)"],["Lechuga","50 g (3 hojas)"],["Tomate crudo","150 g (1 pequeño)"],["Zanahoria","80 g (1 mediana)"],["Atún en agua","75 g"],["Maíz dulce","40 g (¼ lata)"]],
+    pasos:["Lavar, pelar y trocear las hortalizas al gusto.","Emplatar en la base las hortalizas y añadir el maíz y el atún escurridos.","Aliñar con aceite de oliva."],
+    alerg:"Pescado"
+  },
+  "Lomo de cerdo a la plancha con verduras": {
+    ing:[["Aceite de oliva","10 g"],["Ajo","5 g (1 diente)"],["Calabacín","75 g"],["Cebolla","70 g"],["Espárrago","75 g (4 uds)"],["Lomo de cerdo","130 g"],["Pimiento rojo","75 g"],["Perejil","al gusto"]],
+    pasos:["Trocear las hortalizas y asar en la parrilla con el aceite.","Asar el lomo de cerdo en la plancha caliente.","Preparar un majado de ajo con perejil y untar el lomo.","Emplatar el lomo con la parrillada de verduras."],
+    alerg:""
+  },
+  "Ensalada de canónigos, maíz, aceitunas y pavo a la plancha": {
+    ing:[["Aceite de oliva","8 g"],["Canónigos","40 g"],["Aceituna negra","20 g (10 uds)"],["Pavo, pechuga fresca","100 g"],["Maíz dulce","30 g (3 cdas)"]],
+    pasos:["Asar la pechuga de pavo en plancha caliente. Cortar en trozos gruesos.","Emplatar los canónigos, añadir el maíz, aceitunas y el pavo.","Aliñar con aceite de oliva."],
+    alerg:""
+  },
+  "Macarrones a la pimienta con carne picada, calabacín y cebolla": {
+    ing:[["Macarrones","60 g"],["Calabacín","75 g"],["Aceite de oliva","5 g"],["Cebolla","50 g"],["Pimienta negra","al gusto"],["Carne picada ternera","60 g"]],
+    pasos:["Cocer los macarrones en agua hirviendo 12 min. Escurrir.","Pochar la cebolla y el calabacín en dados; cuando dore añadir la carne picada. Rehogar unos minutos.","Añadir los macarrones y mezclar para integrar los sabores."],
+    alerg:"Gluten"
+  },
+  "Fajitas de pollo con aguacate, maíz y queso": {
+    ing:[["Cebolla","35 g"],["Pollo, pechuga","125 g (1 filete)"],["Queso Havarti Light","30 g"],["Aguacate","75 g (9 lonchas)"],["Maíz dulce","20 g"],["Fajita integral","40 g (1 uds)"],["Aceite de oliva","5 g"]],
+    pasos:["Cocinar la pechuga entera en sartén engrasada; hacer cortes, dorar y acabar con vapor tapado. Desmenuzar en tiras.","Mezclar en un bol el pollo, cebolla, maíz y aguacate aplastado. Salpimentar y añadir limón.","Extender la fajita, colocar el queso, la mezcla de pollo y enrollar."],
+    alerg:"Lácteos, gluten"
+  },
+  "Filetitos de lenguado con champiñones y romero": {
+    ing:[["Lenguado","300 g (2 filetes)"],["Cebolla blanca","60 g"],["Champiñón","150 g (7 uds)"],["Aceite de oliva","10 g"],["Romero","al gusto"],["Pimienta negra","al gusto"],["Vino blanco","75 g"]],
+    pasos:["Salpimentar los filetes de lenguado y cortar cada uno en 4 trozos.","Pochar la cebolla en el aceite; añadir los champiñones en cuartos y saltear 3 min.","Incorporar el lenguado, el romero y el vino blanco. Cocinar hasta que el pescado esté hecho.","Emplatar los filetes con los champiñones y la salsa del vino."],
+    alerg:"Pescado, sulfitos"
+  },
+  "Sartén de patatas y huevos con espárragos": {
+    ing:[["Huevo de gallina","60 g (1 uds talla M)"],["Aceite de oliva","5 g"],["Espárrago","125 g (7 uds)"],["Patata","200 g (1 mediana)"],["Cebolla blanca","30 g"]],
+    pasos:["Pelar las patatas en dados y hervir 15 min en agua con sal.","Lavar los espárragos y cortar en trozos descartando el extremo leñoso.","En sartén con el aceite, rehogar la cebolla, las patatas y los espárragos 5 min.","Hacer un hueco, cascar el huevo y cocinar tapado hasta que cuaje."],
+    alerg:"Huevos"
+  }
+};
+
+var PLANTILLAS = [
+  {
+    desayuno:{h:"08:30",p:"Café con leche desnatada + Tostada de pan molde con aguacate y pavo"},
+    media:{h:"10:30",p:"Bebida de almendras con avena + Plátano (170 g)"},
+    comida:{h:"14:00",p:"Ensalada de garbanzos mixta + Piña natural",r:"Ensalada de garbanzos mixta"},
+    merienda:{h:"17:30",p:"Natillas proteicas (120 g)"},
+    cena:{h:"21:30",p:"Pechuga de pavo a la plancha con berenjena",r:"Pechuga de pavo a la plancha con berenjena"}
+  },
+  {
+    desayuno:{h:"08:30",p:"Café con leche desnatada + Tostada de pan de barra con huevos revueltos y jamón serrano"},
+    media:{h:"10:30",p:"Sandía (395 g)"},
+    comida:{h:"14:00",p:"Pollo asado en su jugo + Espárragos + Yogur proteico",r:"Pollo asado en su jugo"},
+    merienda:{h:"17:30",p:"Sándwich mixto"},
+    cena:{h:"21:30",p:"Ensalada de tomate, judías verdes, espárragos y queso fresco",r:"Ensalada de tomate, judías verdes, espárragos y queso fresco"}
+  },
+  {
+    desayuno:{h:"08:30",p:"Café con leche desnatada + Tostada de pan molde con aguacate y pavo"},
+    media:{h:"10:30",p:"Bebida de almendras con avena + Plátano (170 g)"},
+    comida:{h:"14:00",p:"Hamburguesa de pollo con champiñones + Piña natural",r:"Hamburguesa de pollo con champiñones"},
+    merienda:{h:"17:30",p:"Yogur proteico (120 g)"},
+    cena:{h:"21:30",p:"Sepia con pesto de guisantes",r:"Sepia con pesto de guisantes"}
+  },
+  {
+    desayuno:{h:"08:30",p:"Café con leche desnatada + Pan de centeno con hummus"},
+    media:{h:"10:30",p:"Sandía (395 g)"},
+    comida:{h:"14:00",p:"Bacalao al ajoarriero + Piña natural",r:"Bacalao al ajoarriero"},
+    merienda:{h:"17:30",p:"Natillas proteicas (120 g)"},
+    cena:{h:"21:30",p:"Ensalada mixta con atún y maíz",r:"Ensalada mixta con atún y maíz"}
+  },
+  {
+    desayuno:{h:"08:30",p:"Café con leche desnatada + Tostada de pan de barra con huevos revueltos y jamón serrano"},
+    media:{h:"10:30",p:"Bebida de almendras con avena + Plátano (170 g)"},
+    comida:{h:"14:00",p:"Lomo de cerdo a la plancha con verduras + Yogur proteico",r:"Lomo de cerdo a la plancha con verduras"},
+    merienda:{h:"17:30",p:"Sándwich mixto"},
+    cena:{h:"21:30",p:"Ensalada de canónigos, maíz, aceitunas y pavo a la plancha",r:"Ensalada de canónigos, maíz, aceitunas y pavo a la plancha"}
+  },
+  {
+    desayuno:{h:"08:30",p:"Café con leche desnatada + Tostada de pan molde con aguacate y pavo"},
+    media:{h:"10:30",p:"Sandía (395 g)"},
+    comida:{h:"14:00",p:"Macarrones a la pimienta con carne picada, calabacín y cebolla",r:"Macarrones a la pimienta con carne picada, calabacín y cebolla"},
+    merienda:{h:"17:30",p:"Yogur proteico (120 g)"},
+    cena:{h:"21:30",p:"Fajitas de pollo con aguacate, maíz y queso",r:"Fajitas de pollo con aguacate, maíz y queso"}
+  },
+  {
+    desayuno:{h:"08:30",p:"Café con leche desnatada + Pan de centeno con hummus"},
+    media:{h:"10:30",p:"Piña natural (200 g)"},
+    comida:{h:"14:00",p:"Filetitos de lenguado con champiñones y romero",r:"Filetitos de lenguado con champiñones y romero"},
+    merienda:{h:"17:30",p:"Natillas proteicas (120 g)"},
+    cena:{h:"21:30",p:"Sartén de patatas y huevos con espárragos",r:"Sartén de patatas y huevos con espárragos"}
+  }
+];
+
+var COMPRA = [
+  {cat:"🥦 Frutas y verduras", items:[
+    ["Plátano","510 g (≈3 uds)"],["Aguacate","225 g (≈1½ pieza)"],["Sandía","1185 g"],
+    ["Piña natural","800 g"],["Limón","60 g (1 uds)"],["Lechuga","90 g"],
+    ["Tomate crudo","405 g (3-4 tomates)"],["Zanahoria","120 g (2 uds)"],
+    ["Berenjena","150 g (½ grande)"],["Espárrago","540 g (2 manojos)"],
+    ["Champiñón","250 g (1 bandeja)"],["Calabacín","150 g (1 pequeño)"],
+    ["Pimiento rojo","125 g"],["Pimiento verde","50 g"],
+    ["Cebolla / cebolleta","395 g (3-4 uds)"],["Canónigos","40 g"],
+    ["Judía verde","100 g"],["Ajo","23 g (1 cabeza)"]
+  ]},
+  {cat:"🥩 Carnes, pescados y huevos", items:[
+    ["Pechuga de pavo (fiambre)","90 g"],["Pavo, pechuga fresca","250 g"],
+    ["Pollo muslo/contramuslo","270 g"],["Pollo pechuga/solomillo","125 g"],
+    ["Hamburguesa de pollo","150 g"],["Lomo de cerdo","130 g"],
+    ["Carne picada ternera","60 g"],["Jamón serrano","60 g"],
+    ["Jamón cocido","30 g"],["Bacalao salado (para remojar)","150 g"],
+    ["Lenguado","300 g (2 filetes)"],["Sepia","125 g"],
+    ["Atún enlatado en agua","75 g (1 lata)"],["Huevos talla M","3 unidades"]
+  ]},
+  {cat:"🥛 Lácteos y bebidas", items:[
+    ["Leche desnatada UHT","3,375 litros"],["Yogur proteico","4 unidades (480 g)"],
+    ["Natillas proteicas","3 tarrinas (360 g)"],["Bebida de almendras","450 g"],
+    ["Queso Havarti Light","70 g"],["Queso Burgos 0% MG","110 g"],
+    ["Queso parmesano","15 g"]
+  ]},
+  {cat:"🍞 Cereales y derivados", items:[
+    ["Pan de molde","240 g"],["Pan blanco (barra)","140 g"],
+    ["Pan de centeno","140 g"],["Avena","45 g"],
+    ["Macarrones","60 g"],["Fajita integral","1 unidad (40 g)"],
+    ["Maíz dulce enlatado","90 g (1 lata pequeña)"]
+  ]},
+  {cat:"🫘 Legumbres, patatas y otros", items:[
+    ["Garbanzos cocidos","150 g (1 bote)"],["Guisantes congelados","50 g"],
+    ["Hummus","60 g"],["Patata","200 g (1 mediana)"],
+    ["Pistachos","5 g"],["Aceitunas negras","20 g"]
+  ]},
+  {cat:"🫒 Aceites y condimentos", items:[
+    ["Aceite de oliva","115 g (≈11 cdas)"],["Vino de Jerez (cocinar)","50 g"],
+    ["Vino blanco (cocinar)","75 g"],["Laurel, pimienta, romero, albahaca, perejil","al gusto"]
+  ]}
+];
+
+// RENDER TABS
+function renderTabs() {
+  var html = '';
+  for (var i = 0; i < 7; i++) {
+    html += '<div class="tab' + (i === diaIdx ? ' on' : '') + '" data-i="' + i + '">' + DIAS[i] + '</div>';
+  }
+  document.getElementById('tabs').innerHTML = html;
+  document.getElementById('tabs').onclick = function(e) {
+    var t = e.target;
+    if (t.classList.contains('tab')) {
+      diaIdx = parseInt(t.getAttribute('data-i'));
+      renderTabs();
+      renderDia();
+    }
+  };
+}
+
+// RENDER DÍA
+function renderDia() {
+  var d = PLANTILLAS[orden[diaIdx]];
+  var tipos = [
+    {tipo:'Desayuno', dat:d.desayuno},
+    {tipo:'Media mañana', dat:d.media},
+    {tipo:'Comida', dat:d.comida},
+    {tipo:'Merienda', dat:d.merienda},
+    {tipo:'Cena', dat:d.cena}
+  ];
+  var html = '<div class="dia-card"><div class="dia-head"><div class="dia-nom">' + DIAS[diaIdx] + '</div><div class="dia-num">' + (diaIdx + 1) + '</div></div>';
+  for (var i = 0; i < tipos.length; i++) {
+    var t = tipos[i];
+    var tieneR = t.dat.r ? true : false;
+    var rKey = t.dat.r || '';
+    html += '<div class="comida' + (tieneR ? ' tiene-receta' : '') + '"' + (tieneR ? ' data-r="' + rKey + '"' : '') + '>';
+    html += '<div class="c-hora">' + t.dat.h + '</div>';
+    html += '<div class="c-tipo">' + t.tipo + '</div>';
+    html += '<div class="c-nom">' + t.dat.p + '</div>';
+    if (tieneR) html += '<div class="c-ico">📖</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+  document.getElementById('vistaMenu').innerHTML = html;
+  document.getElementById('vistaMenu').onclick = function(e) {
+    var el = e.target;
+    while (el && el !== this) {
+      if (el.classList.contains('tiene-receta')) {
+        abrirReceta(el.getAttribute('data-r'));
+        return;
+      }
+      el = el.parentElement;
+    }
+  };
+}
+
+// RENDER COMPRA
+function renderCompra() {
+  document.getElementById('badgeSem').textContent = 'Semana ' + semana;
+  var html = '';
+  for (var c = 0; c < COMPRA.length; c++) {
+    var cat = COMPRA[c];
+    html += '<div class="cat-blk"><div class="cat-tit">' + cat.cat + '</div>';
+    for (var i = 0; i < cat.items.length; i++) {
+      var k = '' + c + '_' + i;
+      var done = checks[k] ? true : false;
+      html += '<div class="ci' + (done ? ' done' : '') + '" data-k="' + k + '">';
+      html += '<div class="ci-box">' + (done ? '✓' : '') + '</div>';
+      html += '<div class="ci-nom">' + cat.items[i][0] + '</div>';
+      html += '<div class="ci-cant">' + cat.items[i][1] + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  document.getElementById('listaCompra').innerHTML = html;
+  document.getElementById('listaCompra').onclick = function(e) {
+    var el = e.target;
+    while (el && el !== this) {
+      if (el.classList.contains('ci')) {
+        var k = el.getAttribute('data-k');
+        checks[k] = !checks[k];
+        renderCompra();
+        return;
+      }
+      el = el.parentElement;
+    }
+  };
+}
+
+// ABRIR RECETA
+function abrirReceta(nombre) {
+  var r = RECETAS[nombre];
+  if (!r) return;
+  document.getElementById('mTit').textContent = nombre;
+  var html = '';
+  html += '<div class="m-sec"><h4>Ingredientes</h4>';
+  for (var i = 0; i < r.ing.length; i++) {
+    html += '<div class="ing"><span>' + r.ing[i][0] + '</span><span class="ing-c">' + r.ing[i][1] + '</span></div>';
+  }
+  html += '</div>';
+  html += '<div class="m-sec"><h4>Preparación</h4><div class="pasos">';
+  for (var j = 0; j < r.pasos.length; j++) {
+    html += '<div class="paso">' + r.pasos[j] + '</div>';
+  }
+  html += '</div></div>';
+  if (r.alerg) {
+    var chips = r.alerg.split(',');
+    html += '<div class="m-sec"><h4>Alérgenos</h4><div class="chips">';
+    for (var k = 0; k < chips.length; k++) {
+      html += '<span class="chip">' + chips[k].trim() + '</span>';
+    }
+    html += '</div></div>';
+  }
+  document.getElementById('mBody').innerHTML = html;
+  document.getElementById('overlay').classList.add('on');
+}
+
+function cerrarOverlay(e) {
+  if (e.target === document.getElementById('overlay')) cerrarModal();
+}
+function cerrarModal() {
+  document.getElementById('overlay').classList.remove('on');
+}
+
+// NUEVA SEMANA
+function nuevaSemana() {
+  var a = [0,1,2,3,4,5,6];
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  orden = a;
+  semana++;
+  checks = {};
+  diaIdx = 0;
+  renderTabs();
+  renderDia();
+  renderCompra();
+  toast('Nueva semana generada 🎉');
+}
+
+function showVista(v) {
+  document.getElementById('vistaMenu').className = 'vista' + (v === 'menu' ? ' on' : '');
+  document.getElementById('vistaCompra').className = 'vista' + (v === 'compra' ? ' on' : '');
+  document.getElementById('tabs').style.display = v === 'menu' ? 'flex' : 'none';
+  document.getElementById('btnM').className = 'hbtn' + (v === 'menu' ? ' on' : '');
+  document.getElementById('btnC').className = 'hbtn' + (v === 'compra' ? ' on' : '');
+}
+
+function toast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast on';
+  setTimeout(function() { t.className = 'toast'; }, 2500);
+}
+
+// INIT
+renderTabs();
+renderDia();
+renderCompra();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js');
+  });
+}
+</script>
+</body>
+</html>
