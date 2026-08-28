@@ -23,17 +23,17 @@
 body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--tx);min-height:100vh;padding-bottom:90px;}
 
 /* HEADER */
-header{background:var(--v);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.15);}
+header{background:var(--v);padding:12px 14px 10px;display:flex;flex-direction:column;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.15);}
 header h1{font-family:'Fraunces',serif;font-weight:300;font-size:24px;color:#fff;letter-spacing:-.3px;}
 header h1 em{font-style:italic;color:var(--am);}
-.hbtns{display:flex;gap:6px;}
-.hbtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:18px;padding:9px 16px;font-size:15px;font-weight:500;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif;}
+.hbtns{display:flex;gap:6px;justify-content:space-between;}
+.hbtn{flex:1;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:9px 0;font-size:18px;line-height:1;font-weight:500;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif;}
 .hbtn:hover,.hbtn.on{background:var(--am);color:var(--tx);border-color:var(--am);}
 
 /* NAV TABS */
-.tabs{display:flex;background:#fff;border-bottom:2px solid var(--vc);padding:0 10px;gap:0;overflow-x:auto;scrollbar-width:none;}
-.tabs::-webkit-scrollbar{display:none;}
-.tab{padding:13px 15px;font-size:15px;font-weight:500;color:var(--gr);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:.2s;font-family:'DM Sans',sans-serif;}
+.tabs{display:grid;grid-template-columns:repeat(10,1fr);background:#fff;border-bottom:2px solid var(--vc);padding:0 6px;}
+.tab{grid-column:span 2;padding:11px 2px;font-size:13px;font-weight:500;color:var(--gr);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;text-align:center;transition:.2s;font-family:'DM Sans',sans-serif;overflow:hidden;text-overflow:ellipsis;}
+.tab.finde{grid-column:span 5;font-size:14.5px;padding:10px 2px;}
 .tab.on{color:#1e5235;border-bottom-color:#1e5235;font-weight:700;}
 
 /* MAIN */
@@ -200,7 +200,6 @@ body.dark .empty { color:#8aab96; }
 .sdot.ok{background:#5fd68a;box-shadow:0 0 8px rgba(95,214,138,.8);}
 .sdot.err{background:#e8824a;}
 header h1{display:flex;align-items:center;}
-.hbtn{padding:8px 12px;font-size:15px;}
 
 .modo-bar{background:#fff5e0;border:1px dashed var(--na);color:#8a5a2a;border-radius:12px;padding:9px 13px;font-size:13.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px;line-height:1.45;}
 body.dark .modo-bar{background:#3a2f22;border-color:#c9713f;color:#f0c89a;}
@@ -235,6 +234,85 @@ body.dark .cfg-yo button{background:#1e2a24;border-color:#3a4d42;color:#8aab96;}
 .cfg-sep{border-top:1px solid #e0e6e2;margin:18px 0 16px;}
 body.dark .cfg-sep{border-color:#3a4d42;}
 
+/* ── SEGUIMIENTO ── */
+.seg-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.seg-top h2{font-family:'Fraunces',serif;font-size:23px;font-weight:600;color:var(--v);}
+.seg-yo{background:var(--vc);color:var(--v);border-radius:12px;padding:4px 10px;font-size:12.5px;font-weight:600;}
+body.dark .seg-top h2{color:#8ad0a0;} body.dark .seg-yo{background:#2a3d32;color:#8ad0a0;}
+.seg-form{background:#fff;border-radius:16px;padding:14px;box-shadow:var(--sh);margin-bottom:16px;}
+body.dark .seg-form{background:#1e2a24;}
+.seg-fila{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
+.seg-fila:last-child{margin-bottom:0;}
+.seg-fila label{font-size:13px;font-weight:600;color:var(--gr);min-width:64px;}
+.seg-fila input,.seg-fila select{flex:1;min-width:0;padding:10px 11px;border:1px solid #d8e0da;border-radius:10px;font-size:15px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--tx);}
+body.dark .seg-fila input,body.dark .seg-fila select{background:#141d18;border-color:#3a4d42;color:#e8f0eb;}
+.seg-ok{background:var(--v);color:#fff;border:none;border-radius:10px;padding:10px 15px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.seg-card{background:#fff;border-radius:16px;padding:14px;box-shadow:var(--sh);margin-bottom:14px;}
+body.dark .seg-card{background:#1e2a24;}
+.seg-nom{font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:var(--v);margin-bottom:2px;}
+body.dark .seg-nom{color:#8ad0a0;}
+.seg-cifra{font-size:30px;font-weight:600;line-height:1.1;}
+.seg-sub{font-size:12.5px;color:var(--gr);margin-bottom:8px;}
+.seg-tend{font-size:13px;font-weight:600;margin-top:4px;}
+.seg-svg{width:100%;height:auto;display:block;margin-top:6px;color:var(--v);}
+body.dark .seg-svg{color:#6fcf8e;}
+.seg-vacio{font-size:13.5px;color:var(--gr);line-height:1.5;}
+.seg-racha{display:flex;gap:4px;margin-top:12px;flex-wrap:wrap;}
+.seg-dia{width:24px;height:24px;line-height:24px;text-align:center;font-size:11px;font-weight:700;border-radius:7px;background:var(--v);color:#fff;}
+.seg-dia.off{background:#dde5e0;color:#8a9e93;}
+body.dark .seg-dia.off{background:#2a3d32;color:#6a8a78;}
+.seg-nota{background:#fff5e0;border:1px dashed var(--na);color:#8a5a2a;border-radius:12px;padding:9px 13px;font-size:13px;line-height:1.45;margin-top:10px;}
+body.dark .seg-nota{background:#3a2f22;border-color:#c9713f;color:#f0c89a;}
+.seg-borrar{background:transparent;border:none;color:var(--na);font-size:12.5px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;padding:4px 0;margin-top:6px;}
+.seg-hoy{background:var(--v);color:#fff;border-radius:16px;padding:15px;margin-bottom:12px;box-shadow:var(--sh);}
+.seg-hoy-tit{font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin-bottom:9px;}
+.seg-ej{list-style:none;}
+.seg-ej li{font-size:14px;line-height:1.5;padding:5px 0 5px 16px;position:relative;border-bottom:1px solid rgba(255,255,255,.15);}
+.seg-ej li:last-child{border-bottom:none;}
+.seg-ej li:before{content:'•';position:absolute;left:2px;color:var(--am);}
+.seg-hoy-nota{font-size:12.5px;line-height:1.45;opacity:.85;margin-top:8px;}
+.seg-cuadro{background:#fff;border-radius:16px;padding:12px 14px;box-shadow:var(--sh);margin-bottom:14px;}
+body.dark .seg-cuadro{background:#1e2a24;}
+.seg-cuadro summary{font-size:14px;font-weight:600;color:var(--v);cursor:pointer;}
+body.dark .seg-cuadro summary{color:#8ad0a0;}
+.seg-cf{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-bottom:1px solid #eef2ef;}
+body.dark .seg-cf{border-color:#2a3d32;}
+.seg-cf:last-of-type{border-bottom:none;}
+.seg-cf.hoy{font-weight:700;color:var(--v);}
+body.dark .seg-cf.hoy{color:#6fcf8e;}
+.seg-cf span:last-child{color:var(--gr);}
+.seg-cf.hoy span:last-child{color:inherit;}
+.seg-cuenta{font-size:13.5px;color:var(--gr);margin-top:12px;padding-top:10px;border-top:1px solid #eef2ef;}
+body.dark .seg-cuenta{border-color:#2a3d32;}
+.seg-cuenta strong{color:var(--v);font-size:15px;}
+body.dark .seg-cuenta strong{color:#8ad0a0;}
+.seg-animo{background:#eef8f1;border-left:3px solid var(--v);border-radius:0 10px 10px 0;padding:9px 12px;font-size:13.5px;line-height:1.5;margin-top:9px;color:#2d5a3d;}
+body.dark .seg-animo{background:#22322a;color:#a8d8bb;border-left-color:#6fcf8e;}
+
+/* ── PROTEÍNA / LEGUMBRE / ESTEROLES ── */
+.prot-bar{background:#fff;border-radius:14px;padding:11px 14px;box-shadow:var(--sh);margin-bottom:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+body.dark .prot-bar{background:#1e2a24;}
+.prot-lab{font-size:13px;font-weight:600;color:var(--gr);}
+.prot-o{width:16px;height:16px;border-radius:50%;border:2px solid var(--v);display:inline-block;flex:0 0 auto;}
+body.dark .prot-o{border-color:#6fcf8e;}
+.prot-o.full{background:var(--v);} body.dark .prot-o.full{background:#6fcf8e;}
+.prot-o.half{background:linear-gradient(90deg,var(--v) 50%,transparent 50%);}
+body.dark .prot-o.half{background:linear-gradient(90deg,#6fcf8e 50%,transparent 50%);}
+.prot-num{font-size:13px;font-weight:600;margin-left:2px;}
+.prot-tip{font-size:13px;cursor:help;}
+.sem-cont{background:#fff;border-radius:14px;padding:11px 14px;box-shadow:var(--sh);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--gr);}
+body.dark .sem-cont{background:#1e2a24;}
+.sem-cont strong{font-size:15px;color:var(--na);}
+.sem-cont strong.ok{color:var(--v);} body.dark .sem-cont strong.ok{color:#6fcf8e;}
+.est-bloque{background:#fff;border-radius:14px;padding:11px 14px;box-shadow:var(--sh);margin-bottom:10px;display:flex;align-items:center;gap:11px;cursor:pointer;border:2px solid transparent;}
+body.dark .est-bloque{background:#1e2a24;}
+.est-bloque.on{border-color:var(--v);} body.dark .est-bloque.on{border-color:#6fcf8e;}
+.est-check{width:24px;height:24px;flex:0 0 auto;border-radius:8px;border:2px solid #cfd8d2;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;}
+.est-bloque.on .est-check{background:var(--v);border-color:var(--v);}
+body.dark .est-bloque.on .est-check{background:#6fcf8e;border-color:#6fcf8e;color:#14201a;}
+.est-txt{display:flex;flex-direction:column;}
+.est-txt strong{font-size:14px;} .est-txt span{font-size:12.5px;color:var(--gr);}
+
 </style>
 </head>
 <body>
@@ -242,9 +320,10 @@ body.dark .cfg-sep{border-color:#3a4d42;}
 <header>
   <h1>Mi <em>cocina</em><span class="sdot" id="syncDot" title="Sincronizacion"></span></h1>
   <div class="hbtns">
-    <button class="hbtn on" id="btnM" onclick="nav('menu')">📅</button>
-    <button class="hbtn" id="btnC" onclick="nav('compra')">🛒</button>
-    <button class="hbtn" id="btnR" onclick="nav('recetario')">📖</button>
+    <button class="hbtn on" id="btnM" onclick="nav('menu')" title="Menú">📅</button>
+    <button class="hbtn" id="btnC" onclick="nav('compra')" title="Compra">🛒</button>
+    <button class="hbtn" id="btnR" onclick="nav('recetario')" title="Recetario">📖</button>
+    <button class="hbtn" id="btnS" onclick="nav('seg')" title="Seguimiento">📈</button>
     <button class="hbtn" id="btnEns" onclick="toggleModo()" title="Quincena de ensaladas">🥗</button>
     <button class="hbtn" id="btnDark" onclick="toggleDark()" title="Modo noche">🌙</button>
     <button class="hbtn" id="btnCfg" onclick="abrirCfg()" title="Ajustes">⚙️</button>
@@ -274,6 +353,7 @@ body.dark .cfg-sep{border-color:#3a4d42;}
     <div class="filtros" id="filtros"></div>
     <div id="listaRecetas"></div>
   </div>
+  <div class="vista" id="vSeg"></div>
 </div>
 
 <button class="fab" id="fab" onclick="nuevaSemana()">🔀 Nueva semana</button>
@@ -311,6 +391,15 @@ body.dark .cfg-sep{border-color:#3a4d42;}
           <button id="cfgYoA" onclick="setYo('A')">Persona 1</button>
           <button id="cfgYoB" onclick="setYo('B')">Persona 2</button>
         </div>
+      </div>
+      <div class="cfg-f">
+        <label>Raciones de proteína al día (objetivo)</label>
+        <input type="number" id="cfgProt" min="2" max="8" step="1" placeholder="4">
+      </div>
+      <div class="cfg-help" style="margin-top:-6px">
+        Una ración ≈ 25-30 g: una pechuga, un filete de pescado, tres huevos
+        o dos yogures griegos. Un plato de legumbre cuenta media. Es un suelo
+        que alcanzar, no un límite: pasarse no importa.
       </div>
       <div class="cfg-sep"></div>
       <div class="cfg-help">
@@ -352,103 +441,103 @@ var RECETAS = {
   // ── RECETAS DE LA DIETA (entre semana y finde) ─────────────
 
   "Ensalada de garbanzos mixta": {
-    tipo:"dieta", cat:"ensalada", emoji:"🥗",
+    prot:0.5, tipo:"dieta", cat:"ensalada", emoji:"🥗",
     ing:[["Aceite de oliva","5 g"],["Cebolla","30 g"],["Lechuga","40 g"],["Tomate","75 g"],["Zanahoria","40 g"],["Garbanzos cocidos","150 g"]],
     pasos:["Escurrir los garbanzos y pasarlos bajo agua fría.","Añadir zanahoria, tomate, lechuga y cebolla troceados. Mezclar bien.","Aliñar con aceite de oliva en crudo."],
     alerg:""
   },
   "Pechuga de pavo a la plancha con berenjena": {
-    tipo:"dieta", cat:"carne", emoji:"🍗",
+    prot:1.25, tipo:"dieta", cat:"carne", emoji:"🍗",
     ing:[["Aceite de oliva","8 g"],["Berenjena","150 g"],["Pavo, pechuga fresca","150 g"]],
     pasos:["Asar a la plancha el filete de pechuga de pavo.","En sartén con el aceite asar la berenjena en rodajas.","Emplatar el pavo con la berenjena asada."],
     alerg:""
   },
   "Pollo asado en su jugo": {
-    tipo:"dieta", cat:"carne", emoji:"🍗",
+    prot:1.75, tipo:"dieta", cat:"carne", emoji:"🍗",
     ing:[["Aceite de oliva","10 g"],["Ajo","10 g (2 dientes)"],["Pollo muslo/contramuslo","270 g"],["Laurel","al gusto"],["Vino de Jerez","50 g"]],
     pasos:["Colocar el muslo sin piel en fuente de horno. Agregar aceite, laurel, ajos y vino.","Horno a 190ºC, 20 min. Dar la vuelta y regar con los jugos.","Otros 20 min, dar la vuelta y asar 15 min más.","Emplatar y aliñar con el jugo del fondo."],
     alerg:"Sulfitos"
   },
   "Ensalada de tomate, judías verdes, espárragos y queso fresco": {
-    tipo:"dieta", cat:"ensalada", emoji:"🥗",
+    prot:0.5, tipo:"dieta", cat:"ensalada", emoji:"🥗",
     ing:[["Tomate","180 g"],["Judía verde","100 g"],["Espárrago","100 g"],["Queso Burgos 0% MG","110 g"],["Aceite de oliva","10 g"]],
     pasos:["Escaldar espárragos y judías 5 min. Escurrir.","Trocear el tomate y mezclar con las verduras.","Añadir queso fresco en dados y aliñar con aceite."],
     alerg:"Lácteos"
   },
   "Hamburguesa de pollo con champiñones": {
-    tipo:"dieta", cat:"carne", emoji:"🍔",
+    prot:1, tipo:"dieta", cat:"carne", emoji:"🍔",
     ing:[["Aceite de oliva","5 g"],["Champiñón","100 g"],["Hamburguesa de pollo","150 g"]],
     pasos:["Asar la hamburguesa a la plancha.","Saltear el champiñón en cuartos con el aceite.","Emplatar juntos."],
     alerg:""
   },
   "Sepia con pesto de guisantes": {
-    tipo:"dieta", cat:"pescado", emoji:"🦑",
+    prot:1, tipo:"dieta", cat:"pescado", emoji:"🦑",
     ing:[["Sepia","125 g"],["Queso parmesano","15 g"],["Aceite de oliva","8 g"],["Guisantes congelados","50 g"],["Pistacho","5 g"],["Ajo","3 g"],["Albahaca","5 g"],["Limón","½ unidad"]],
     pasos:["Cocer los guisantes 8 min. Escurrir.","Triturar guisantes, parmesano, pistachos, ajo, albahaca, aceite y zumo de limón.","Asar la sepia en sartén caliente 2 min por lado.","Servir sobre el pesto."],
     alerg:"Lácteos, frutos secos, moluscos"
   },
   "Bacalao al ajoarriero": {
-    tipo:"dieta", cat:"pescado", emoji:"🐟",
+    prot:1, tipo:"dieta", cat:"pescado", emoji:"🐟",
     ing:[["Pimiento rojo","50 g"],["Pimiento verde","50 g"],["Aceite de oliva","10 g"],["Ajo","5 g"],["Cebolla blanca","50 g"],["Bacalao salado remojado","150 g"],["Tomate en puré","45 g"]],
     pasos:["Remojar el bacalao la noche anterior.","Pochar los pimientos, ajo y cebolla.","Añadir el tomate y cocinar 5 min.","Dorar el bacalao y romperlo en lascas.","Incorporar al sofrito y cocer 10 min a fuego suave."],
     alerg:"Pescado"
   },
   "Ensalada mixta con atún y maíz": {
-    tipo:"dieta", cat:"ensalada", emoji:"🥗",
+    prot:0.75, tipo:"dieta", cat:"ensalada", emoji:"🥗",
     ing:[["Aceite de oliva","10 g"],["Cebolleta","70 g"],["Lechuga","50 g"],["Tomate","150 g"],["Zanahoria","80 g"],["Atún en agua","75 g"],["Maíz dulce","40 g"]],
     pasos:["Lavar y trocear las hortalizas.","Emplatar con el maíz y atún escurridos.","Aliñar con aceite."],
     alerg:"Pescado"
   },
   "Lomo de cerdo a la plancha con verduras": {
-    tipo:"dieta", cat:"carne", emoji:"🥩",
+    prot:1, tipo:"dieta", cat:"carne", emoji:"🥩",
     ing:[["Aceite de oliva","10 g"],["Ajo","5 g"],["Calabacín","75 g"],["Cebolla","70 g"],["Espárrago","75 g"],["Lomo de cerdo","130 g"],["Pimiento rojo","75 g"],["Perejil","al gusto"]],
     pasos:["Asar las hortalizas troceadas en parrilla con aceite.","Asar el lomo en plancha caliente.","Untar el lomo con majado de ajo y perejil.","Emplatar con la parrillada de verduras."],
     alerg:""
   },
   "Ensalada de canónigos con maíz, aceitunas y pavo": {
-    tipo:"dieta", cat:"ensalada", emoji:"🥗",
+    prot:0.75, tipo:"dieta", cat:"ensalada", emoji:"🥗",
     ing:[["Aceite de oliva","8 g"],["Canónigos","40 g"],["Aceituna negra","20 g"],["Pavo pechuga fresca","100 g"],["Maíz dulce","30 g"]],
     pasos:["Asar la pechuga de pavo en plancha. Cortar en trozos.","Emplatar canónigos, añadir maíz, aceitunas y pavo.","Aliñar con aceite."],
     alerg:""
   },
   "Macarrones a la pimienta con carne picada y calabacín": {
-    tipo:"dieta", cat:"pasta", emoji:"🍝",
+    prot:0.75, tipo:"dieta", cat:"pasta", emoji:"🍝",
     ing:[["Macarrones","60 g"],["Calabacín","75 g"],["Aceite de oliva","5 g"],["Cebolla","50 g"],["Pimienta negra","al gusto"],["Carne picada ternera","60 g"]],
     pasos:["Cocer los macarrones 12 min. Escurrir.","Pochar cebolla y calabacín; añadir la carne picada y rehogar.","Mezclar con los macarrones."],
     alerg:"Gluten"
   },
   "Fajitas de pollo con aguacate y queso": {
-    tipo:"dieta", cat:"carne", emoji:"🌮",
+    prot:1.25, tipo:"dieta", cat:"carne", emoji:"🌮",
     ing:[["Cebolla","35 g"],["Pollo, pechuga","125 g"],["Queso Havarti Light","30 g"],["Aguacate","75 g"],["Maíz dulce","20 g"],["Fajita integral","1 unidad (40 g)"],["Aceite de oliva","5 g"]],
     pasos:["Cocinar el pollo en sartén y desmenuzar en tiras.","Mezclar pollo, cebolla, maíz y aguacate aplastado. Salpimentar.","Extender la fajita, poner queso, rellenar y enrollar."],
     alerg:"Lácteos, gluten"
   },
   "Lenguado con champiñones y romero": {
-    tipo:"dieta", cat:"pescado", emoji:"🐟",
+    prot:1, tipo:"dieta", cat:"pescado", emoji:"🐟",
     ing:[["Lenguado","300 g"],["Cebolla blanca","60 g"],["Champiñón","150 g"],["Aceite de oliva","10 g"],["Romero","al gusto"],["Vino blanco","75 g"]],
     pasos:["Salpimentar el lenguado y cortar en trozos.","Pochar cebolla, añadir champiñones y saltear 3 min.","Incorporar el lenguado, romero y vino. Cocinar hasta que esté hecho.","Servir con los champiñones y la salsa."],
     alerg:"Pescado, sulfitos"
   },
   "Sartén de patatas y huevos con espárragos": {
-    tipo:"dieta", cat:"huevos", emoji:"🥚",
+    prot:0.25, tipo:"dieta", cat:"huevos", emoji:"🥚",
     ing:[["Huevo","1 unidad talla M"],["Aceite de oliva","5 g"],["Espárrago","125 g"],["Patata","200 g"],["Cebolla blanca","30 g"]],
     pasos:["Hervir las patatas en dados 15 min.","Cortar los espárragos en trozos.","Rehogar cebolla, patatas y espárragos en sartén 5 min.","Cascar el huevo en un hueco y cocinar tapado hasta que cuaje."],
     alerg:"Huevos"
   },
   "Pisto con garbanzos": {
-    tipo:"dieta", cat:"verduras", emoji:"🫘",
+    prot:0.5, tipo:"dieta", cat:"verduras", emoji:"🫘",
     ing:[["Garbanzos cocidos","150 g"],["Calabacín grande","1 unidad"],["Berenjena","1 unidad"],["Tomates maduros","½ kg"],["Pimiento verde grande","1 unidad"],["Cebolla","1 unidad"],["Ajo","1 diente"],["Aceite, azúcar, sal","al gusto"]],
     pasos:["Salar la berenjena en dados y dejarla escurrir 1 hora.","Escaldar los tomates, pelarlos y cortarlos.","Dorar cebolla, pimiento y ajo. Añadir calabacín y berenjena.","Incorporar el tomate. Disolver el ajo, añadir azúcar y sal.","Agregar los garbanzos y cocer a fuego suave 15 min."],
     alerg:""
   },
   "Arroz con repollo": {
-    tipo:"dieta", cat:"arroz", emoji:"🍚",
+    prot:0.25, tipo:"dieta", cat:"arroz", emoji:"🍚",
     ing:[["Repollo","1 unidad pequeña"],["Arroz","al gusto"],["Cebolla morada","1 unidad"],["Tomates pelados","4 unidades"],["Pimienta","al gusto"]],
     pasos:["Hervir el repollo troceado 10-12 min. Escurrir.","En la misma olla cocer el arroz.","En sartén sofreír cebolla, añadir tomates, repollo y jamón.","Mezclar con el arroz y servir con pimienta."],
     alerg:""
   },
   "Nidos de calabacín y huevo": {
-    tipo:"dieta", cat:"huevos", emoji:"🥚",
+    prot:0.5, tipo:"dieta", cat:"huevos", emoji:"🥚",
     ing:[["Calabacín","2 unidades"],["Huevos","4 unidades"],["Queso parmesano","15 g"],["Aceite de oliva","20 ml"],["Sal, pimienta, orégano","al gusto"]],
     pasos:["Cortar el calabacín en espiral tipo fideos. Mezclar con sal, pimienta, orégano y aceite.","Formar 4 nidos en bandeja de horno con papel.","Hornear 10 min a 180ºC.","Hacer un hueco en cada nido y cascar un huevo. Hornear 10 min más."],
     alerg:"Huevos, lácteos"
@@ -457,43 +546,43 @@ var RECETAS = {
   // ── RECETAS DE FINDE (sábado y domingo) ────────────────────
 
   "Pad Thai": {
-    tipo:"finde", cat:"asian", emoji:"🍜",
+    prot:0.75, tipo:"finde", cat:"asian", emoji:"🍜",
     ing:[["Fideos de arroz finos","50 g"],["Pollo o gambas","30 g"],["Tofu firme","20 g"],["Cebollino o cebolleta","10 g"],["Brotes de soja","30 g"],["Chalota","1 cdita"],["Gambas secas","1 cdita"],["Huevo","1 unidad"],["Aceite","2 cdas"],["Salsa de ostras","1 cda"],["Salsa de pescado","1 cda"],["Salsa de tamarindo","1 cdita"],["Azúcar","1 cdita"],["Agua","100 ml"]],
     pasos:["Freír el tofu hasta que esté dorado. Añadir la chalota y el pollo, sofreír.","Romper el huevo y remover hasta cuajar.","Añadir los fideos, gambas secas, rábano encurtido y el agua. Remover bien.","Sazonar con salsa de ostras, de pescado, tamarindo y azúcar. Cocinar hasta que los fideos estén tiernos.","Añadir brotes de soja y cebollino. Mezclar y servir."],
     alerg:"Gluten, mariscos, pescado, huevos"
   },
   "Pollo salteado con anacardos": {
-    tipo:"finde", cat:"asian", emoji:"🍗",
+    prot:0.5, tipo:"finde", cat:"asian", emoji:"🍗",
     ing:[["Pechuga de pollo","50 g"],["Maíz tierno baby","30 g"],["Cebolla grande","30 g"],["Setas de oreja","30 g"],["Cebollino","10 g"],["Chile o guindilla","1 unidad"],["Anacardos","1 cda"],["Ajo picado","1 cda"],["Aceite","1,5 cdas"],["Azúcar","½ cdita"],["Salsa de ostras","1 cda"],["Salsa de pescado","½ cda"],["Agua","¼ taza"]],
     pasos:["Sofreír el ajo hasta que esté fragante. Añadir el pollo y saltear hasta que esté hecho.","Añadir el maíz, la cebolla, las setas y el chile. Remover bien.","Añadir agua y sazonar con azúcar, salsa de ostras y de pescado.","Incorporar los anacardos y el cebollino. Mezclar y apagar el fuego."],
     alerg:"Frutos secos, mariscos, pescado"
   },
   "Pollo salteado con albahaca tailandesa": {
-    tipo:"finde", cat:"asian", emoji:"🍗",
+    prot:0.75, tipo:"finde", cat:"asian", emoji:"🍗",
     ing:[["Pechuga de pollo picada","80 g"],["Cebolla grande","30 g"],["Albahaca tailandesa","20 g"],["Chile fresco","2-3 unidades"],["Ajo picado","1 cda"],["Aceite","1,5 cdas"],["Agua","3 cdas"],["Salsa de ostras","1 cda"],["Salsa de pescado","½ cda"]],
     pasos:["Sofreír el ajo y el chile fresco hasta que estén fragantes.","Añadir el pollo y saltear hasta que esté hecho.","Incorporar la albahaca y sazonar con salsa de pescado, ostras y agua. Mezclar bien.","Apagar el fuego. Servir sobre arroz con huevo frito encima."],
     alerg:"Mariscos, pescado, huevos"
   },
   "Ensalada de papaya verde (Som Tam)": {
-    tipo:"finde", cat:"asian", emoji:"🥗",
+    prot:0.25, tipo:"finde", cat:"asian", emoji:"🥗",
     ing:[["Papaya verde rallada","100 g"],["Ajo","1-3 dientes"],["Chile fresco","1-3 unidades"],["Judías verdes largas","20 g"],["Tomate","30 g"],["Azúcar de palma","1 cdita"],["Salsa de pescado","1 cda"],["Lima","1 cda de zumo"],["Salsa de tamarindo","1 cdita"],["Cacahuetes tostados","1 cda"]],
     pasos:["Machacar el ajo y el chile en el mortero.","Añadir las judías y machacar hasta que estén rotas.","Incorporar azúcar, salsa de pescado, zumo de lima y tamarindo. Machacar.","Añadir el tomate y la papaya. Mezclar machacando suavemente.","Coronar con los cacahuetes tostados."],
     alerg:"Frutos secos, pescado"
   },
   "Cous cous de Zahra": {
-    tipo:"finde", cat:"magreb", emoji:"🫕",
+    prot:1, tipo:"finde", cat:"magreb", emoji:"🫕",
     ing:[["Zanahoria","2 unidades"],["Calabacín","1 unidad"],["Calabaza","1 trozo"],["Nabo","1 unidad"],["Tomate","2 unidades"],["Cebolla","1 unidad"],["Carne (cordero o pollo)","al gusto"],["Cous cous","al gusto"],["Aceite, jengibre, colorante, pimienta","al gusto"],["Para la cebolla caramelizada: 2 cebollas, azúcar, pasas, canela",""]],
     pasos:["Sofreír la carne con la cebolla, tomate y especias. Rehogar hasta que el tomate se haga.","Añadir agua y luego zanahoria y nabo. Dejar cocer.","Preparar el cous cous con un poco de aceite y sal. Poner al baño maría y añadir agua poco a poco removiendo.","Añadir calabaza y calabacín. Cuando esté todo hecho, añadir tomate natural rallado.","Para la cebolla caramelizada: sofreír 2 cebollas en juliana, añadir azúcar, pasas y canela."],
     alerg:"Gluten"
   },
   "Lombarda con manzana, pasas y piñones": {
-    tipo:"finde", cat:"verduras", emoji:"🥬",
+    prot:0.25, tipo:"finde", cat:"verduras", emoji:"🥬",
     ing:[["Lombarda","1 unidad pequeña"],["Cebolla","2 unidades"],["Manzana Gala","2 unidades"],["Vino blanco","1 vaso"],["Piñones","30 g"],["Pasas","60 g"],["Vinagre de vino","3 cdas o ½ vaso"],["Agua","1 vaso"],["Aceite, sal, pimienta","al gusto"]],
     pasos:["Pelar cebollas, cortar en tiras finas y sofreír con aceite y sal hasta dorar. Poner las pasas a remojar en vino.","Quitar el tronco a la lombarda y cortar en tiras finas. Añadir a la olla y dar vueltas 5 min.","Añadir la manzana en dados. Salpimentar, subir fuego y añadir vinagre. Remover hasta que evapore.","Añadir agua (1 vaso), tapar y cocer 30 min a fuego lento.","Añadir pasas, vino y piñones tostados en sartén sin aceite. Cocer 5 min destapado."],
     alerg:"Frutos secos, sulfitos"
   },
   "Aloo Gobi (curry de patata y coliflor)": {
-    tipo:"finde", cat:"asian", emoji:"🍛",
+    prot:0.5, tipo:"finde", cat:"asian", emoji:"🍛",
     ing:[["Coliflor","½ unidad"],["Patatas grandes","2 unidades"],["Tomates maduros","3 unidades"],["Cebolla grande","1 unidad"],["Ajo","2 dientes"],["Anacardos","60 g"],["Cúrcuma","1 cdita"],["Garam masala","½ cdita"],["Comino","1 cdita"],["Caldo de verduras","1 litro"],["Sal y pimienta","al gusto"]],
     pasos:["La noche anterior dejar los anacardos en remojo.","Pelar y cortar patatas en dados. Escaldar la coliflor 5 min y reservar.","Sofreír cebolla en dados. Añadir ajo triturado y saltear 1 min.","Añadir cúrcuma, comino, garam masala y pimienta. Saltear 5 min.","Triturar los anacardos con 80 ml de agua hasta obtener una crema.","Añadir la crema a la sartén junto con los tomates. Incorporar coliflor y patatas. Cocer con el caldo 5-7 min."],
     alerg:"Frutos secos"
@@ -544,121 +633,121 @@ var RECETAS = {
   // ══════════════════════════════════════════════════════════
 
   "Ensalada de pollo y calabacín a la plancha": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🍗", alino:"Vinagreta Dijon-miel emulsionada",
+    prot:1.25, tipo:"ensalada", cat:"ensalada", emoji:"🍗", alino:"Vinagreta Dijon-miel emulsionada",
     ing:[["Pechuga de pollo","300 g"],["Calabacín","1 mediano (250 g)"],["Lechuga","150 g"],["Zanahoria coreana","150 g"],["Maíz dulce","120 g"],["Aceite de oliva","10 g"],["Sal y pimienta","al gusto"]],
     pasos:["Cortar el pollo en tiras gruesas, salpimentar y hacer a la plancha bien caliente 3-4 min por lado. Reservar.","Cortar el calabacín en tacos de 2 cm y pasarlos por la plancha con un hilo de aceite hasta que estén dorados por fuera y tiernos dentro (6-8 min).","Poner la lechuga cortada en juliana como base.","Repartir encima el pollo, el calabacín, la zanahoria coreana y el maíz escurrido.","Aliñar con la vinagreta Dijon-miel justo antes de servir y remover."],
     alerg:"Mostaza"
   },
   "Ensalada campera de atún": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🥔", alino:"Vinagreta de mostaza a la antigua y perejil",
+    prot:1.25, tipo:"ensalada", cat:"ensalada", emoji:"🥔", alino:"Vinagreta de mostaza a la antigua y perejil",
     ing:[["Patata","400 g"],["Atún en aceite","2 latas (150 g escurrido)"],["Huevo","2 unidades"],["Lechuga","100 g"],["Canónigos","60 g"],["Cebolla morada","½ unidad"],["Sal","al gusto"]],
     pasos:["Cocer las patatas enteras con piel en agua con sal 20-25 min. Pelar en caliente y cortar en dados. Dejar templar.","Cocer los huevos 10 min, enfriar y cortar en cuartos.","Cortar la cebolla morada en pluma fina y dejarla 5 min en agua fría con un chorrito de vinagre para suavizarla. Escurrir.","Mezclar en una fuente la patata, la lechuga en juliana, los canónigos y la cebolla.","Coronar con el atún desmigado y el huevo. Aliñar con la vinagreta."],
     alerg:"Pescado, huevos, mostaza"
   },
   "Ensalada de salmón y espárragos verdes": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🐟", alino:"Vinagreta de eneldo y mostaza",
+    prot:1.25, tipo:"ensalada", cat:"ensalada", emoji:"🐟", alino:"Vinagreta de eneldo y mostaza",
     ing:[["Salmón fresco","300 g"],["Espárragos verdes","250 g"],["Espinacas baby","120 g"],["Almendras","30 g"],["Cebolla morada","½ unidad"],["Aceite de oliva","10 g"],["Sal y pimienta","al gusto"]],
     pasos:["Salpimentar el salmón y hacerlo a la plancha 3 min por el lado de la piel y 2 min por el otro. Dejar templar y desmigar en lascas gruesas.","Cortar la parte dura de los espárragos. Saltearlos en la misma sartén 4-5 min, que queden al dente y con marca.","Tostar las almendras en seco 2 min y picarlas gruesas.","Montar sobre una base de espinacas: espárragos, salmón en lascas, cebolla morada en pluma fina y almendras.","Aliñar con la vinagreta de eneldo."],
     alerg:"Pescado, frutos secos, mostaza"
   },
   "Ensalada de garbanzos y tomate seco": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🫘", alino:"Vinagreta de ajo asado",
+    prot:0.5, tipo:"ensalada", cat:"ensalada", emoji:"🫘", alino:"Vinagreta de ajo asado",
     ing:[["Garbanzos cocidos","400 g"],["Tomate seco en aceite","50 g"],["Pimiento rojo","1 unidad"],["Cebolla morada","½ unidad"],["Espinacas baby","80 g"],["Aceite de oliva","5 g"]],
     pasos:["Asar el pimiento rojo entero al horno a 200ºC unos 35 min, dándole la vuelta a mitad. Tapar 10 min, pelar y cortar en tiras.","Escurrir los garbanzos y pasarlos por agua fría. Secarlos bien con un paño (así absorben mejor el aliño).","Picar el tomate seco en tiras finas y la cebolla morada muy fina.","Mezclar todo con las espinacas y el pimiento asado.","Aliñar con la vinagreta de ajo asado y dejar reposar 10 min antes de servir."],
     alerg:""
   },
   "Cuscús mediterráneo con calabacín": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🌾", alino:"Vinagreta de limón y hierbas",
+    prot:0.5, tipo:"ensalada", cat:"ensalada", emoji:"🌾", alino:"Vinagreta de limón y hierbas",
     ing:[["Cuscús","120 g"],["Caldo de verduras o agua","130 ml"],["Calabacín","1 mediano"],["Pimiento rojo","½ unidad"],["Pimiento verde","½ unidad"],["Guisantes","100 g"],["Almendras","30 g"],["Aceite de oliva","10 g"],["Sal","al gusto"]],
     pasos:["Hervir el caldo, verterlo sobre el cuscús, tapar y dejar 5 min. Soltar los granos con un tenedor y un hilo de aceite. Dejar enfriar.","Cortar el calabacín y los pimientos en dados pequeños. Saltear a fuego fuerte 6-8 min con un poco de aceite y sal.","Cocer los guisantes 4 min en agua hirviendo con sal y enfriarlos en agua con hielo para que queden verdes.","Tostar las almendras y picarlas.","Mezclar el cuscús con las verduras, los guisantes y las almendras. Aliñar con la vinagreta de limón."],
     alerg:"Gluten, frutos secos"
   },
   "Cuscús moruno de zanahoria y melocotón": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🥕", alino:"Salsa de yogur, limón y comino",
+    prot:0.75, tipo:"ensalada", cat:"ensalada", emoji:"🥕", alino:"Salsa de yogur, limón y comino",
     ing:[["Cuscús","120 g"],["Caldo de verduras o agua","130 ml"],["Zanahoria marroquí","200 g"],["Garbanzos cocidos","250 g"],["Melocotón","1 unidad"],["Almendras","30 g"],["Cilantro o perejil fresco","al gusto"]],
     pasos:["Hidratar el cuscús con el caldo hirviendo 5 min, tapado. Soltar con un tenedor y enfriar.","Escurrir los garbanzos y secarlos.","Cortar el melocotón en gajos finos (que no esté demasiado maduro, tiene que aguantar).","Mezclar el cuscús con los garbanzos, la zanahoria marroquí, el melocotón y las almendras tostadas.","Aliñar con la salsa de yogur al comino y terminar con cilantro fresco picado."],
     alerg:"Gluten, frutos secos, lácteos"
   },
   "Coleslaw de lombarda y piña con pollo": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🥬", alino:"Vinagreta de piña y jengibre",
+    prot:1.25, tipo:"ensalada", cat:"ensalada", emoji:"🥬", alino:"Vinagreta de piña y jengibre",
     ing:[["Lombarda","200 g"],["Col blanca","200 g"],["Zanahoria","200 g"],["Pechuga de pollo","250 g"],["Piña natural","200 g"],["Almendras","30 g"],["Sal","al gusto"]],
     pasos:["Cortar la lombarda y la col en juliana muy fina (mandolina si tienes). Salarlas ligeramente y dejarlas 15 min en un colador para que suelten agua. Secar.","Rallar la zanahoria en tiras largas.","Hacer el pollo a la plancha salpimentado y cortarlo en tiras al hilo.","Cortar la piña en dados pequeños.","Mezclar todo en un bol grande, aliñar con la vinagreta de piña y jengibre y dejar reposar 15 min en la nevera. Terminar con las almendras tostadas."],
     alerg:"Frutos secos"
   },
   "Ensalada de jamón y melocotón": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🍑", alino:"Vinagreta de miel y Jerez",
+    prot:0.75, tipo:"ensalada", cat:"ensalada", emoji:"🍑", alino:"Vinagreta de miel y Jerez",
     ing:[["Taquitos de jamón serrano","120 g"],["Melocotón","2 unidades"],["Canónigos","120 g"],["Almendras","30 g"],["Cebolla morada","½ unidad"],["Aceite de oliva","5 g"]],
     pasos:["Saltear los taquitos de jamón en una sartén sin aceite 2-3 min hasta que estén crujientes. Escurrir sobre papel.","Cortar el melocotón en gajos y marcarlos 1 min por lado en la misma sartén (el azúcar caramelizado es lo que hace esta ensalada).","Cortar la cebolla morada en pluma muy fina.","Montar sobre los canónigos: melocotón, jamón crujiente, cebolla y almendras tostadas.","Aliñar con la vinagreta de miel y Jerez, en poca cantidad."],
     alerg:"Frutos secos, sulfitos"
   },
   "Ensalada tropical de pollo y piña": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🍍", alino:"Salsa de yogur, lima y cilantro",
+    prot:1.25, tipo:"ensalada", cat:"ensalada", emoji:"🍍", alino:"Salsa de yogur, lima y cilantro",
     ing:[["Pechuga de pollo","300 g"],["Piña natural","250 g"],["Maíz dulce","120 g"],["Lechuga","150 g"],["Zanahoria","100 g"],["Aceite de oliva","10 g"],["Sal y pimienta","al gusto"]],
     pasos:["Cortar el pollo en dados, salpimentar y saltear a fuego fuerte hasta que esté dorado.","Cortar la piña en dados y marcarla en la sartén 2 min (opcional pero recomendable).","Rallar la zanahoria en tiras y cortar la lechuga en juliana.","Mezclar todo con el maíz escurrido.","Aliñar con la salsa de yogur, lima y cilantro."],
     alerg:"Lácteos"
   },
   "Ensalada de champiñones salteados, espinacas y jamón": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🍄", alino:"Vinagreta templada de ajo y Jerez",
+    prot:1.25, tipo:"ensalada", cat:"ensalada", emoji:"🍄", alino:"Vinagreta templada de ajo y Jerez",
     ing:[["Champiñones","300 g"],["Espinacas baby","120 g"],["Taquitos de jamón serrano","100 g"],["Huevo","2 unidades"],["Ajo","2 dientes"],["Aceite de oliva","10 g"],["Sal y pimienta","al gusto"]],
     pasos:["Cocer los huevos 10 min, enfriar y cortar en cuartos.","Laminar los champiñones. Saltearlos a fuego MUY fuerte y sin sal hasta que se doren (si los sales antes, sueltan agua y se cuecen). Salar al final.","En la misma sartén dorar el ajo laminado y los taquitos de jamón 2 min.","Poner las espinacas en la fuente y volcar encima los champiñones y el jamón aún calientes: las espinacas se atemperan un poco y quedan perfectas.","Añadir el huevo duro y aliñar con la vinagreta templada."],
     alerg:"Huevos, sulfitos"
   },
   "Ensalada de patata, judías verdes y salmón": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🥔", alino:"Vinagreta de alcaparras y perejil",
+    prot:1.5, tipo:"ensalada", cat:"ensalada", emoji:"🥔", alino:"Vinagreta de alcaparras y perejil",
     ing:[["Salmón fresco","300 g"],["Patata","350 g"],["Judías verdes","250 g"],["Huevo","2 unidades"],["Cebolla morada","½ unidad"],["Aceite de oliva","10 g"],["Sal","al gusto"]],
     pasos:["Cocer las patatas con piel 20 min. Pelar y cortar en rodajas gruesas.","Cocer las judías verdes despuntadas 6-8 min en agua con sal y enfriarlas de golpe en agua con hielo (así quedan verdes y crujientes).","Cocer los huevos 10 min.","Hacer el salmón a la plancha y desmigarlo en lascas.","Montar la fuente en capas: patata, judías, salmón, huevo en cuartos y cebolla morada muy fina. Aliñar con la vinagreta de alcaparras."],
     alerg:"Pescado, huevos"
   },
   "Ensalada rusa ligera de atún": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🥣", alino:"Mayonesa ligera de yogur y mostaza",
+    prot:1.25, tipo:"ensalada", cat:"ensalada", emoji:"🥣", alino:"Mayonesa ligera de yogur y mostaza",
     ing:[["Patata","300 g"],["Zanahoria","200 g"],["Guisantes","150 g"],["Maíz dulce","100 g"],["Huevo","2 unidades"],["Atún en aceite","2 latas (150 g escurrido)"],["Sal","al gusto"]],
     pasos:["Cocer juntas la patata y la zanahoria peladas y en dados, 12-15 min hasta que estén tiernas pero enteras. Escurrir bien y dejar enfriar del todo.","Cocer los guisantes 4 min y enfriarlos en agua con hielo.","Cocer los huevos 10 min y picarlos.","Mezclar todo con el maíz y el atún desmigado.","Añadir la mayonesa ligera de yogur y mezclar con cuidado para no romper las verduras. Enfriar 1 h en la nevera."],
     alerg:"Pescado, huevos, lácteos, mostaza"
   },
   "Ensalada de espinacas, melocotón y salmón": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🌿", alino:"Vinagreta agridulce de melocotón",
+    prot:1.25, tipo:"ensalada", cat:"ensalada", emoji:"🌿", alino:"Vinagreta agridulce de melocotón",
     ing:[["Salmón fresco","300 g"],["Espinacas baby","150 g"],["Melocotón","1 unidad"],["Cebolla morada","½ unidad"],["Almendras","30 g"],["Aceite de oliva","10 g"],["Sal y pimienta","al gusto"]],
     pasos:["Hacer el salmón a la plancha, dejarlo templar y desmigarlo en lascas grandes.","Cortar el melocotón en gajos finos.","Laminar la cebolla morada muy fina.","Montar sobre las espinacas: salmón, melocotón, cebolla y almendras tostadas.","Aliñar con la vinagreta agridulce de melocotón."],
     alerg:"Pescado, frutos secos"
   },
   "Ensalada de espárragos verdes y huevo duro": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🥚", alino:"Ajoblanco corto (salsa de almendra y ajo)",
+    prot:0.75, tipo:"ensalada", cat:"ensalada", emoji:"🥚", alino:"Ajoblanco corto (salsa de almendra y ajo)",
     ing:[["Espárragos verdes","350 g"],["Huevo","3 unidades"],["Canónigos","100 g"],["Cebolla morada","½ unidad"],["Almendras","20 g"],["Aceite de oliva","10 g"],["Sal","al gusto"]],
     pasos:["Cocer los huevos 10 min, enfriar y pelar. Reservar.","Cortar la parte leñosa de los espárragos. Marcarlos en la plancha con aceite y sal 5-6 min, que queden al dente.","Extender el ajoblanco en el fondo de la fuente como una crema (el aliño va DEBAJO, no encima: es lo que hace que el plato funcione).","Colocar encima los espárragos, los canónigos y el huevo partido por la mitad.","Terminar con cebolla morada muy fina, almendras picadas y un hilo de aceite."],
     alerg:"Huevos, frutos secos"
   },
   "Ensalada de garbanzos, espinacas y champiñones al ajillo": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🧄", alino:"Salsa de almendra tostada",
+    prot:0.75, tipo:"ensalada", cat:"ensalada", emoji:"🧄", alino:"Salsa de almendra tostada",
     ing:[["Garbanzos cocidos","400 g"],["Champiñones","250 g"],["Espinacas baby","120 g"],["Ajo","3 dientes"],["Aceite de oliva","15 g"],["Pimentón dulce","1 pellizco"],["Sal","al gusto"]],
     pasos:["Escurrir los garbanzos y secarlos bien.","Laminar los champiñones y saltearlos a fuego muy fuerte sin sal hasta dorar. Salar al final y reservar.","En la misma sartén, dorar el ajo laminado en el aceite. Fuera del fuego añadir el pimentón (que no se queme).","Volcar los garbanzos en la sartén y saltearlos 2 min con el ajo para que cojan sabor.","Mezclar en caliente con las espinacas y los champiñones. Servir sobre la salsa de almendra tostada."],
     alerg:"Frutos secos"
   },
   "Ensalada de pasta vegetal con atún": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🍝", alino:"Pesto rojo de tomate seco y almendra",
+    prot:1.25, tipo:"ensalada", cat:"ensalada", emoji:"🍝", alino:"Pesto rojo de tomate seco y almendra",
     ing:[["Pasta vegetal","180 g en seco"],["Atún en aceite","2 latas (150 g escurrido)"],["Maíz dulce","120 g"],["Tomate seco en aceite","40 g"],["Pimiento rojo","1 unidad"],["Sal","al gusto"]],
     pasos:["Cocer la pasta en abundante agua con sal, 1 min MENOS de lo que diga el paquete (en frío la pasta se endurece, así queda perfecta).","Escurrir y enfriar bajo el grifo. Escurrir muy bien y mezclar con un hilo de aceite para que no se apelmace.","Cortar el pimiento rojo en dados pequeños y el tomate seco en tiras.","Mezclar la pasta con el atún desmigado, el maíz, el pimiento y el tomate seco.","Añadir el pesto rojo y remover bien. Mejor si reposa 30 min."],
     alerg:"Pescado, gluten, frutos secos"
   },
   "Ensalada de judías verdes y patata con huevo": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🫛", alino:"Salsa tonnata (sin anchoa)",
+    prot:0.5, tipo:"ensalada", cat:"ensalada", emoji:"🫛", alino:"Salsa tonnata (sin anchoa)",
     ing:[["Judías verdes","350 g"],["Patata","350 g"],["Huevo","3 unidades"],["Cebolla","½ unidad"],["Pimiento verde","½ unidad"],["Aceite de oliva","10 g"],["Sal","al gusto"]],
     pasos:["Cocer las patatas peladas y en dados 12-15 min. Escurrir y dejar enfriar.","Cocer las judías despuntadas 6-8 min y enfriarlas de golpe en agua con hielo.","Cocer los huevos 10 min y cortar en cuartos.","Picar la cebolla y el pimiento verde muy finos.","Mezclar todo en una fuente y cubrir con la salsa tonnata. Un hilo de aceite por encima."],
     alerg:"Huevos, pescado, mostaza"
   },
   "Ensalada de pimientos asados y garbanzos": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🫑", alino:"Vinagreta de comino y pimentón",
+    prot:0.5, tipo:"ensalada", cat:"ensalada", emoji:"🫑", alino:"Vinagreta de comino y pimentón",
     ing:[["Pimiento rojo","2 unidades"],["Pimiento verde","1 unidad"],["Garbanzos cocidos","400 g"],["Tomate seco en aceite","40 g"],["Cebolla","1 unidad"],["Ajo","2 dientes"],["Aceite de oliva","15 g"],["Sal","al gusto"]],
     pasos:["Asar los pimientos y la cebolla enteros al horno a 200ºC unos 40 min, dando la vuelta a mitad.","Sacar, tapar con papel de aluminio 10 min (el vapor hace que se pelen solos) y pelar. Cortar en tiras y guardar el jugo que sueltan.","Escurrir y secar los garbanzos.","Mezclar los pimientos, la cebolla asada, los garbanzos, el tomate seco en tiras y el ajo muy picado.","Aliñar con la vinagreta de comino y pimentón + el jugo del asado. Reposar 30 min: gana muchísimo."],
     alerg:""
   },
   "Ensalada de pasta vegetal con pollo y champiñones": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🍗", alino:"Salsa cremosa de mostaza y estragón",
+    prot:1.5, tipo:"ensalada", cat:"ensalada", emoji:"🍗", alino:"Salsa cremosa de mostaza y estragón",
     ing:[["Pasta vegetal","180 g en seco"],["Pechuga de pollo","250 g"],["Champiñones","200 g"],["Guisantes","120 g"],["Pimiento rojo","½ unidad"],["Aceite de oliva","10 g"],["Sal y pimienta","al gusto"]],
     pasos:["Cocer la pasta 1 min menos que el paquete. Escurrir, enfriar y engrasar con un hilo de aceite.","Saltear el pollo en dados salpimentado hasta dorar. Reservar.","Saltear los champiñones laminados a fuego fuerte sin sal hasta dorar.","Cocer los guisantes 4 min y enfriarlos en agua con hielo.","Mezclar todo con el pimiento en dados y la salsa cremosa de mostaza y estragón."],
     alerg:"Gluten, lácteos, mostaza"
   },
   "Ensalada de col, zanahoria coreana y salmón": {
-    tipo:"ensalada", cat:"ensalada", emoji:"🥢", alino:"Vinagreta de sésamo y soja",
+    prot:1, tipo:"ensalada", cat:"ensalada", emoji:"🥢", alino:"Vinagreta de sésamo y soja",
     ing:[["Col blanca","250 g"],["Zanahoria coreana","150 g"],["Salmón fresco","250 g"],["Canónigos","80 g"],["Almendras","30 g"],["Cebolleta","1 unidad"],["Sal","al gusto"]],
     pasos:["Cortar la col en juliana muy fina. Salarla ligeramente y dejarla 15 min en un colador. Secar bien.","Hacer el salmón a la plancha, dejar templar y desmigar en lascas.","Mezclar la col con la zanahoria coreana y los canónigos.","Añadir el salmón por encima, la cebolleta en aros finos y las almendras tostadas.","Aliñar con la vinagreta de sésamo y soja."],
     alerg:"Pescado, frutos secos, sésamo, soja, gluten"
@@ -806,6 +895,56 @@ var RECETAS = {
     alerg:"Soja, gluten, sésamo"
   }
 ,
+
+  // ══════════════════════════════════════════════════════════
+  // 🫘 ENSALADAS DE LEGUMBRE (agosto 2026)
+  // Añadidas para subir la legumbre a 4-5 veces por semana: la fibra
+  // soluble de la legumbre es de las palancas que más bajan el LDL.
+  // Todas para 2 personas, como el resto de ensaladas.
+  // ══════════════════════════════════════════════════════════
+
+  "Ensalada de lentejas pardinas y cebolla morada": {
+    prot:0.75, tipo:"ensalada", cat:"ensalada", emoji:"🫘", alino:"Vinagreta de mostaza a la antigua y perejil",
+    ing:[["Lentejas pardinas cocidas","400 g"],["Cebolla morada","1 unidad"],["Pimiento verde italiano","1 unidad"],["Zanahoria","1 unidad"],["Canónigos","80 g"],["Nueces","30 g"],["Sal y pimienta","al gusto"]],
+    pasos:["Escurrir las lentejas y pasarlas por agua fría. Secarlas bien con un paño: mojadas no cogen el aliño.","Cortar la cebolla morada en pluma muy fina y dejarla 5 min en agua fría con un chorrito de vinagre para que pierda el picor. Escurrir.","Picar el pimiento verde en dados pequeños y rallar la zanahoria en juliana gruesa.","Tostar las nueces en seco 2 min en la sartén y picarlas gruesas.","Mezclar las lentejas con la verdura, añadir los canónigos y aliñar. Dejar reposar 10 min antes de servir."],
+    alerg:"Frutos secos, mostaza"
+  },
+  "Ensalada de garbanzos, espinaca y comino": {
+    prot:0.5, tipo:"ensalada", cat:"ensalada", emoji:"🫘", alino:"Vinagreta de comino y pimentón",
+    ing:[["Garbanzos cocidos","400 g"],["Espinacas baby","120 g"],["Calabacín","1 mediano"],["Cebolleta","1 unidad"],["Pasas","30 g"],["Aceite de oliva virgen extra","10 g"],["Sal y pimienta","al gusto"]],
+    pasos:["Escurrir los garbanzos, aclarar y secar bien.","Cortar el calabacín en medias lunas finas y hacerlo a la plancha con un hilo de aceite hasta que esté dorado (6-8 min).","Hidratar las pasas 10 min en agua templada y escurrir.","Picar la cebolleta muy fina, incluida la parte verde.","Mezclar los garbanzos templados con el calabacín, la cebolleta y las pasas. Añadir las espinacas al final para que no se lacien.","Aliñar con la vinagreta de comino y pimentón."],
+    alerg:""
+  },
+  "Ensalada de alubia blanca y pimiento asado": {
+    prot:1, tipo:"ensalada", cat:"ensalada", emoji:"🫘", alino:"Vinagreta de ajo asado",
+    ing:[["Alubia blanca cocida","400 g"],["Pimiento rojo","1 unidad"],["Pimiento verde","1 unidad"],["Cebolla","1 unidad"],["Huevo","2 unidades"],["Perejil fresco","1 puñado"],["Aceite de oliva virgen extra","10 g"]],
+    pasos:["Asar los pimientos y la cebolla enteros al horno a 200ºC unos 40 min, dándoles la vuelta a mitad.","Tapar 10 min al salir del horno, pelar y cortar en tiras. Reservar el jugo del asado: va al aliño.","Cocer los huevos 10 min, enfriar y cortar en cuartos.","Escurrir y aclarar las alubias con cuidado, que no se rompan. Secar.","Mezclar las alubias con las verduras asadas y el jugo, aliñar y coronar con el huevo y el perejil picado."],
+    alerg:"Huevos"
+  },
+  "Ensalada de lentejas, calabaza asada y nueces": {
+    prot:0.75, tipo:"ensalada", cat:"ensalada", emoji:"🎃", alino:"Vinagreta de miel y Jerez",
+    ing:[["Lentejas pardinas cocidas","400 g"],["Calabaza","400 g"],["Rúcula","80 g"],["Nueces","40 g"],["Cebolla morada","½ unidad"],["Comino molido","½ cdita"],["Aceite de oliva virgen extra","10 g"],["Sal y pimienta","al gusto"]],
+    pasos:["Pelar la calabaza y cortarla en dados de 2 cm. Aliñar con aceite, comino, sal y pimienta.","Asar a 200ºC unos 25 min, hasta que esté tierna y con los bordes dorados. Dejar templar.","Escurrir y secar las lentejas.","Tostar las nueces en seco 2 min y picarlas gruesas.","Montar sobre base de rúcula: lentejas, calabaza, cebolla en pluma fina y nueces por encima.","Aliñar con la vinagreta de miel y Jerez justo antes de servir."],
+    alerg:"Frutos secos"
+  },
+  "Ensalada de judía verde, garbanzo y tomate seco": {
+    prot:0.5, tipo:"ensalada", cat:"ensalada", emoji:"🫛", alino:"Vinagreta de limón y hierbas",
+    ing:[["Judía verde plana","300 g"],["Garbanzos cocidos","300 g"],["Tomate seco en aceite","40 g"],["Patata","2 pequeñas"],["Cebolleta","1 unidad"],["Almendras","30 g"],["Sal","al gusto"]],
+    pasos:["Despuntar las judías y cortarlas en trozos de 4 cm. Cocer en agua con sal 8-10 min, que queden al dente.","Cortar el corte con agua fría y hielo para que mantengan el verde. Escurrir bien.","Cocer las patatas con piel 20 min, pelar en caliente y cortar en dados.","Escurrir y secar los garbanzos. Picar el tomate seco en tiras finas y la cebolleta muy fina.","Tostar las almendras en seco y picarlas gruesas.","Mezclar todo templado y aliñar con la vinagreta de limón y hierbas."],
+    alerg:"Frutos secos"
+  },
+  "Ensalada de alubia pinta, atún y cebolleta": {
+    prot:1.5, tipo:"ensalada", cat:"ensalada", emoji:"🫘", alino:"Vinagreta de alcaparras y perejil",
+    ing:[["Alubia pinta cocida","400 g"],["Atún en aceite","2 latas (150 g escurrido)"],["Cebolleta","2 unidades"],["Pimiento verde italiano","1 unidad"],["Zanahoria","1 unidad"],["Lechuga","100 g"],["Huevo","2 unidades"]],
+    pasos:["Escurrir y aclarar las alubias con suavidad. Secarlas.","Cocer los huevos 10 min, enfriar y cortar en cuartos.","Picar la cebolleta y el pimiento verde en dados pequeños. Rallar la zanahoria gruesa.","Mezclar las alubias con la verdura picada y dejar reposar 10 min con parte del aliño.","Montar sobre base de lechuga en juliana, coronar con el atún desmigado y el huevo.","Terminar con el resto de la vinagreta de alcaparras."],
+    alerg:"Pescado, huevos"
+  },
+  "Granola de avena y nueces (freidora de aire)": {
+    prot:0.25, tipo:"recetario", cat:"entrantes", emoji:"🥣",
+    ing:[["Copos de avena","250 g"],["Nueces","100 g"],["Nueces de macadamia u otro fruto seco","50 g"],["Semillas de chía","30 g"],["Miel","35 g"],["Aceite de oliva virgen extra suave","30 ml"],["Canela molida","3 g"],["Esencia de vainilla","5 ml"],["Sal","1 pellizco"]],
+    pasos:["Trocear los frutos secos a cuchillo, no muy finos.","Mezclar en un bol los copos de avena, los frutos secos y la chía.","Añadir la canela, la miel, el aceite, la vainilla y el pellizco de sal. Remover hasta que todo quede impregnado.","Retirar la rejilla de la freidora de aire y volcar la mezcla directamente en la cubeta.","Programar 6 min a 150ºC, abriendo a mitad para remover. Tiene que quedar ligeramente dorada, no marrón.","Dejar enfriar del todo antes de guardarla: cruje al enfriar, no al salir. En bote hermético y armario oscuro aguanta dos semanas.","RACIÓN: 50 g, unas 10 raciones por tanda. Pésala las primeras veces, a cucharadas se va al doble sin notarlo.","Una ración aporta 25 g de avena y 15 g de nuez. Para llegar a los objetivos del día, añade 15 g de nueces sueltas sobre el yogur y saca el resto de la avena del desayuno."],
+    alerg:"Frutos secos"
+  },
 
   // ── AÑADE AQUÍ NUEVAS RECETAS ──────────────────────────────
   // Copia este bloque y rellena los campos:
@@ -974,6 +1113,8 @@ var ST = {
   cocina:{},                     // "0_comida" -> {v:'A'|'B'|'', t:ms}
   checks:{},                     // clave -> {v:bool, t:ms, by:'A'|'B'}
   quien:{},                      // clave -> {v:'A'|'B'|'', t:ms}
+  seg:{},                        // "peso|A|2026-08-28" -> {v:num|str|null, t:ms}
+  protObj:4,                     // raciones de proteína objetivo al día
   nombres:{A:'María', B:'Pareja'},
   ts:0                           // marca de tiempo del menú
 };
@@ -1053,6 +1194,7 @@ function fusionar(rem) {
     ST.menuIdx  = rem.menuIdx;
     ST.menuEns  = rem.menuEns;
     ST.nombres  = rem.nombres || ST.nombres;
+    ST.protObj  = rem.protObj || ST.protObj;
     ST.ts       = rem.ts;
     cambio = true;
   }
@@ -1060,6 +1202,10 @@ function fusionar(rem) {
   if (fusionarMapa(ST.checks, rem.checks || {})) cambio = true;
   if (fusionarMapa(ST.cocina, rem.cocina || {})) cambio = true;
   if (fusionarMapa(ST.quien,  rem.quien  || {})) cambio = true;
+  // El seguimiento va aquí a propósito: si fuese por ST.ts global, la pesada
+  // de una pisaría la de la otra cuando las dos registran el mismo día.
+  if (!ST.seg) ST.seg = {};
+  if (fusionarMapa(ST.seg,    rem.seg    || {})) cambio = true;
   return cambio;
 }
 
@@ -1264,7 +1410,7 @@ function diaDatos(idx) {
 function renderTabs() {
   var html = '';
   for (var i = 0; i < 7; i++) {
-    html += '<div class="tab'+(i===diaAct?' on':'')+'" data-i="'+i+'">'+DIAS[i]+'</div>';
+    html += '<div class="tab'+(i>=5?' finde':'')+(i===diaAct?' on':'')+'" data-i="'+i+'">'+DIAS[i]+'</div>';
   }
   var t = document.getElementById('tabs');
   t.innerHTML = html;
@@ -1276,8 +1422,110 @@ function renderTabs() {
   };
 }
 
-function chipCocina(idx, slot) {
-  var k = idx + '_' + slot;
+/* ── PROTEÍNA ───────────────────────────────────────────────
+   1 ración ≈ 25-30 g de proteína: una pechuga, un filete de pescado,
+   tres huevos, dos yogures griegos. Las recetas llevan el valor en su
+   campo "prot". Desayunos, medias mañanas y meriendas son texto libre,
+   así que se estiman por palabras clave.
+   Es una estimación por raciones, no una cuenta al gramo: sirve para
+   ver "hoy voy corta", nada más. */
+var PROT_TEXTO = [
+  [/natillas proteicas|yogur proteico/i, 0.75],
+  [/huevos revueltos|jam[oó]n serrano/i, 0.5],
+  [/s[aá]ndwich mixto/i, 0.5],
+  [/pavo|hummus/i, 0.25],
+  [/yogur|porridge|avena/i, 0.25],
+  [/almendra|nueces|frutos secos/i, 0.25],
+  [/leche/i, 0.25]
+];
+function protTexto(txt) {
+  if (!txt) return 0;
+  var t = 0;
+  for (var i = 0; i < PROT_TEXTO.length; i++) {
+    if (PROT_TEXTO[i][0].test(txt)) { t += PROT_TEXTO[i][1]; }
+  }
+  return Math.min(1, t);
+}
+function protDia(pl) {
+  var t = 0, k, campos = ['desayuno','media','comida','merienda','cena'];
+  for (var i = 0; i < campos.length; i++) {
+    k = pl[campos[i]];
+    if (!k) continue;
+    if (k.r && RECETAS[k.r] && typeof RECETAS[k.r].prot === 'number') t += RECETAS[k.r].prot;
+    else t += protTexto(k.p);
+  }
+  return Math.round(t*4)/4;
+}
+/* Objetivo por persona, configurable en ⚙️. Es un suelo, no un techo:
+   pasarse no importa, quedarse corta mientras se recorta comida sí,
+   porque entonces el déficit se lleva músculo por delante. */
+function protObjetivo() { return (ST.protObj || 4); }
+
+function protBarra(v) {
+  var obj = protObjetivo(), h = '<div class="prot-bar"><span class="prot-lab">Proteína</span>';
+  for (var i = 1; i <= obj; i++) {
+    var lleno = v >= i, medio = (!lleno && v >= i - 0.5);
+    h += '<span class="prot-o'+(lleno?' full':(medio?' half':''))+'"></span>';
+  }
+  h += '<span class="prot-num">'+v+' de '+obj+'</span>';
+  if (v < obj - 0.5) h += '<span class="prot-tip" title="Completa con un yogur griego, un huevo duro o un puñado de frutos secos">ℹ️</span>';
+  return h + '</div>';
+}
+
+/* ── LEGUMBRE Y ESTEROLES ───────────────────────────────────── */
+function esLegumbre(nom) {
+  var r = RECETAS[nom];
+  if (!r) return false;
+  for (var i = 0; i < r.ing.length; i++) {
+    if (/garbanzo|lenteja|alubia|jud[ií]a blanca|jud[ií]a pinta|frijol|soja texturizada/i.test(r.ing[i][0])) return true;
+  }
+  return false;
+}
+function legumbresSemana() {
+  var n = 0;
+  for (var d = 0; d < 7; d++) {
+    var pl = diaDatos(d), hay = false;
+    if (pl.comida.r && esLegumbre(pl.comida.r)) hay = true;
+    if (pl.cena.r   && esLegumbre(pl.cena.r))   hay = true;
+    if (hay) n++;
+  }
+  return n;
+}
+
+/* ── ESTEROLES ───────────────────────────────────────────────
+   2 g al día. Es lo más rentable del plan (-8/-10 % de LDL en tres
+   semanas) y lo más fácil de olvidar. El efecto desaparece al dejarlos,
+   así que lo que importa es la racha, no el total. */
+function esterolHoy() {
+  if (!ST.seg) ST.seg = {};
+  var e = ST.seg['esterol|'+CFG.yo+'|'+segHoy()];
+  return !!(e && e.v);
+}
+function esterolToggle() {
+  segPon('esterol', CFG.yo, segHoy(), esterolHoy() ? null : 1);
+  renderDia(diaAct);
+  if (document.getElementById('vSeg').className.indexOf('on') !== -1) renderSeg();
+}
+function esterolRacha(letra) {
+  var d = new Date(), n = 0, i, k;
+  if (!ST.seg) return 0;
+  for (i = 0; i < 400; i++) {
+    k = 'esterol|'+letra+'|'+d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);
+    if (ST.seg[k] && ST.seg[k].v) n++;
+    else if (i > 0) break;          // el día de hoy aún puede estar sin marcar
+    d.setDate(d.getDate()-1);
+  }
+  return n;
+}
+function esterolesBloque() {
+  var hecho = esterolHoy(), r = esterolRacha(CFG.yo);
+  return '<div class="est-bloque'+(hecho?' on':'')+'" onclick="esterolToggle()">'+
+    '<span class="est-check">'+(hecho ? '✓' : '')+'</span>'+
+    '<div class="est-txt"><strong>Esteroles vegetales de hoy</strong>'+
+    '<span>2 g con una comida'+(r > 1 ? ' · '+r+' días seguidos' : '')+'</span></div></div>';
+}
+
+function chipCocina(idx, slot) {  var k = idx + '_' + slot;
   var v = (ST.cocina[k] && ST.cocina[k].v) || '';
   var txt = v ? '👩‍🍳 ' + nombreDe(v) : '👩‍🍳 ¿quién cocina?';
   return '<button class="chip-cocina'+(v?' a'+v:'')+'" data-cok="'+k+'">'+txt+'</button>';
@@ -1318,6 +1566,11 @@ function renderDia(idx) {
     html += '</div>';
   }
   html += '</div>';
+  html += protBarra(protDia(pl));
+  var lg = legumbresSemana();
+  html += '<div class="sem-cont"><span>🫘 Legumbre esta semana</span>'+
+          '<strong class="'+(lg >= 4 ? 'ok' : '')+'">'+lg+' de 4</strong></div>';
+  html += esterolesBloque();
   var v = document.getElementById('vMenu');
   v.innerHTML = html;
   v.onclick = function(e) {
@@ -1648,6 +1901,7 @@ function cerrarModal() { document.getElementById('overlay').classList.remove('on
 function abrirCfg() {
   document.getElementById('cfgNomA').value  = ST.nombres.A || '';
   document.getElementById('cfgNomB').value  = ST.nombres.B || '';
+  document.getElementById('cfgProt').value  = ST.protObj || 4;
   document.getElementById('cfgHogar').value = CFG.hogar || '';
   document.getElementById('cfgUrl').value   = CFG.url || '';
   document.getElementById('cfgKey').value   = CFG.key || '';
@@ -1666,6 +1920,8 @@ function guardarCfg() {
     A: document.getElementById('cfgNomA').value.trim() || 'Persona 1',
     B: document.getElementById('cfgNomB').value.trim() || 'Persona 2'
   };
+  var po = parseInt(document.getElementById('cfgProt').value, 10);
+  ST.protObj = (po >= 2 && po <= 8) ? po : 4;
   CFG.hogar = document.getElementById('cfgHogar').value.trim();
   CFG.url   = document.getElementById('cfgUrl').value.trim();
   CFG.key   = document.getElementById('cfgKey').value.trim();
@@ -1695,16 +1951,308 @@ function arrancarSync() {
   syncInt = setInterval(traerRemoto, 8000);
 }
 
+// ── SEGUIMIENTO ─────────────────────────────────────────────
+/* Cada sesión lleva dentro sus ejercicios. Así el desplegable deja de pedir
+   que elijas algo explicado en otro documento. */
+var SEG_TIPOS = {
+  'pierna1': {
+    n:'Pesas: piernas (1)', l:'P', corto:'Piernas 1',
+    ej:['Sentadilla — 4 × 8-12',
+        'Zancadas caminando — 4 × 10 por pierna',
+        'Peso muerto rumano con mancuernas — 4 × 8-12',
+        'Elevación de talones — 4 × 15-20',
+        'Puente de glúteo — 4 × 15'],
+    nota:'90 s de descanso entre series. Las dos primeras semanas, solo peso corporal.'
+  },
+  'pierna2': {
+    n:'Pesas: piernas (2)', l:'P', corto:'Piernas 2',
+    ej:['Sentadilla búlgara — 4 × 8-10 por pierna',
+        'Peso muerto a una pierna — 4 × 8 por pierna',
+        'Step-up a banco o escalón — 4 × 12 por pierna',
+        'Abducción de cadera con goma — 4 × 15 por lado',
+        'Plancha lateral — 4 × 30-45 s por lado'],
+    nota:'Es la sesión de equilibrio. Si te tambaleas, apóyate en la pared con una mano.'
+  },
+  'brazos': {
+    n:'Pesas: brazos y abdomen', l:'B', corto:'Brazos',
+    ej:['Flexiones (de rodillas o contra la pared si hace falta) — 3 × 8-12',
+        'Remo con mancuerna — 3 × 10 por brazo',
+        'Press de hombro — 3 × 10',
+        'Plancha frontal — 3 × 30-45 s',
+        'Bird-dog (cuadrupedia, brazo y pierna contrarios) — 3 × 10 por lado'],
+    nota:''
+  },
+  'andar': {
+    n:'Andar rápido o bici', l:'A', corto:'Andar',
+    ej:['40 min a ritmo vivo: deberías poder hablar, pero no cantar',
+        'A partir de la semana 5: meter cuestas, o intervalos de 2 min fuerte / 3 min suave × 6'],
+    nota:''
+  },
+  'salida': {
+    n:'Salida larga (finde)', l:'S', corto:'Salida',
+    ej:['60-90 min: senderismo, bici o natación',
+        'Ritmo cómodo, lo que cuenta es el rato'],
+    nota:''
+  },
+  'otro':     { n:'Otro ejercicio', l:'O', corto:'Otro',     ej:[], nota:'' },
+  'descanso': { n:'Descanso',       l:'·', corto:'Descanso', ej:[], nota:'El descanso también cuenta: el músculo se construye descansando, no entrenando.' }
+};
+
+/* Qué toca cada día de la semana. 0 = domingo en JS. */
+var SEG_PLAN = ['descanso','pierna1','andar','brazos','andar','pierna2','salida'];
+
+function segTocaHoy() { return SEG_PLAN[new Date().getDay()]; }
+
+function segHoy() {
+  var d = new Date(), m = d.getMonth()+1, dd = d.getDate();
+  return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(dd<10?'0':'')+dd;
+}
+function segFmt(f) {
+  var p = f.split('-');
+  return p[2]+'/'+p[1];
+}
+function segPon(tipo, letra, fecha, valor) {
+  if (!ST.seg) ST.seg = {};
+  ST.seg[tipo+'|'+letra+'|'+fecha] = { v: valor, t: Date.now() };
+  guardar();
+}
+function segLee(tipo, letra) {
+  if (!ST.seg) ST.seg = {};
+  var pre = tipo+'|'+letra+'|', out = [], k;
+  for (k in ST.seg) {
+    if (k.indexOf(pre) !== 0) continue;
+    var e = ST.seg[k];
+    if (!e || e.v === null || e.v === undefined || e.v === '') continue;
+    out.push({ f: k.slice(pre.length), v: e.v });
+  }
+  out.sort(function(a,b){ return a.f < b.f ? -1 : (a.f > b.f ? 1 : 0); });
+  return out;
+}
+
+/* Media móvil de 7 días. El peso oscila casi un kilo por agua de un día a
+   otro; sin suavizar, la gráfica no dice nada útil. */
+function segMedia7(s) {
+  var out = [], i, j, sum, n;
+  for (i = 0; i < s.length; i++) {
+    sum = 0; n = 0;
+    for (j = Math.max(0, i-6); j <= i; j++) { sum += s[j].v; n++; }
+    out.push({ f: s[i].f, v: Math.round(sum/n*100)/100 });
+  }
+  return out;
+}
+
+function segGrafica(s) {
+  if (s.length < 2) return '';
+  var W = 300, H = 110, i, min = Infinity, max = -Infinity;
+  for (i = 0; i < s.length; i++) {
+    if (s[i].v < min) min = s[i].v;
+    if (s[i].v > max) max = s[i].v;
+  }
+  var pad = (max - min) * 0.2 || 0.5;
+  min -= pad; max += pad;
+  var pts = [];
+  for (i = 0; i < s.length; i++) {
+    var x = 34 + (s.length === 1 ? 0 : (i/(s.length-1))*(W-44));
+    var y = 12 + (1 - (s[i].v-min)/(max-min))*(H-32);
+    pts.push(Math.round(x*10)/10 + ',' + Math.round(y*10)/10);
+  }
+  return '<svg viewBox="0 0 '+W+' '+H+'" class="seg-svg" preserveAspectRatio="none">'+
+    '<polyline points="'+pts.join(' ')+'" fill="none" stroke="currentColor" '+
+    'stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'+
+    '<text x="1" y="15" font-size="10" fill="#8a9e93">'+max.toFixed(1)+'</text>'+
+    '<text x="1" y="'+(H-16)+'" font-size="10" fill="#8a9e93">'+min.toFixed(1)+'</text>'+
+    '<text x="34" y="'+(H-2)+'" font-size="9.5" fill="#8a9e93">'+segFmt(s[0].f)+'</text>'+
+    '<text x="'+(W-30)+'" y="'+(H-2)+'" font-size="9.5" fill="#8a9e93">'+segFmt(s[s.length-1].f)+'</text>'+
+    '</svg>';
+}
+
+function segTarjeta(letra) {
+  var pesos = segLee('peso', letra);
+  var h = '<div class="seg-card"><div class="seg-nom">'+nombreDe(letra)+'</div>';
+  if (pesos.length) {
+    var u = pesos[pesos.length-1];
+    h += '<div class="seg-cifra">'+u.v+' kg</div>';
+    h += '<div class="seg-sub">último registro · '+segFmt(u.f)+'</div>';
+    var med = segMedia7(pesos);
+    h += segGrafica(med);
+    if (med.length >= 8) {
+      var ini = med[Math.max(0, med.length-29)];
+      var dif = med[med.length-1].v - ini.v;
+      h += '<div class="seg-tend">'+(dif >= 0 ? '+' : '')+dif.toFixed(2)+
+           ' kg desde el '+segFmt(ini.f)+' <span style="font-weight:400;color:#8a9e93">(media de 7 días)</span></div>';
+    } else {
+      h += '<div class="seg-sub">La tendencia aparece cuando haya 8 pesadas.</div>';
+    }
+  } else {
+    h += '<div class="seg-vacio">Sin pesadas registradas todavía.</div>';
+  }
+
+  // Contador de la semana en curso
+  var sem = segSemana(letra);
+  h += '<div class="seg-cuenta"><strong>'+sem.total+'</strong> '+
+       (sem.total === 1 ? 'sesión' : 'sesiones')+' esta semana · '+
+       '<strong>'+sem.piernas+'</strong> de piernas</div>';
+
+  var an = segAnimo(letra, sem);
+  if (an) h += '<div class="seg-animo">'+an+'</div>';
+
+  var ses = segLee('sesion', letra).slice(-14);
+  if (ses.length) {
+    h += '<div class="seg-racha">';
+    for (var i = 0; i < ses.length; i++) {
+      var t = SEG_TIPOS[ses[i].v];
+      if (!t) continue;
+      h += '<span class="seg-dia'+(ses[i].v === 'descanso' ? ' off' : '')+
+           '" title="'+segFmt(ses[i].f)+' · '+t.n+'">'+t.l+'</span>';
+    }
+    h += '</div><div class="seg-sub" style="margin-top:6px">últimas '+ses.length+' sesiones</div>';
+  }
+  return h + '</div>';
+}
+
+/* Sesiones de los últimos 7 días. */
+function segSemana(letra) {
+  var d = new Date(); d.setDate(d.getDate()-6);
+  var lim = d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);
+  var ses = segLee('sesion', letra), total = 0, piernas = 0, i;
+  for (i = 0; i < ses.length; i++) {
+    if (ses[i].f < lim) continue;
+    if (ses[i].v === 'descanso') continue;
+    total++;
+    if (ses[i].v === 'pierna1' || ses[i].v === 'pierna2') piernas++;
+  }
+  return { total: total, piernas: piernas };
+}
+
+/* Mensajes de ánimo. Van por constancia, no por kilos: la constancia es lo
+   que se puede controlar, y en recomposición el peso no se mueve aunque
+   todo vaya bien. El de peso solo aparece si baja, y nunca hay reproche
+   si sube: el peso oscila solo. */
+function segAnimo(letra, sem) {
+  var msg = [];
+  if (sem.total >= 5)      msg.push('💪 ' + sem.total + ' sesiones esta semana. Estás cumpliendo el plan entero.');
+  else if (sem.total >= 3) msg.push('👏 Vas por buen camino: ' + sem.total + ' sesiones esta semana.');
+  else if (sem.total >= 1) msg.push('🌱 Ya has empezado la semana. La constancia pesa más que la intensidad.');
+
+  if (sem.piernas >= 2)      msg.push('Las dos de piernas hechas: eso es lo que construye músculo.');
+  else if (sem.total >= 3 && sem.piernas === 0)
+    msg.push('Llevas la semana sin sesión de piernas. Es la que más cuesta y la que más cambia las cosas.');
+
+  var med = segMedia7(segLee('peso', letra));
+  if (med.length >= 10) {
+    var dif = med[med.length-1].v - med[Math.max(0, med.length-29)].v;
+    if (dif <= -0.4) msg.push('📉 La media va bajando de forma sostenida. Es exactamente el ritmo que buscabas.');
+    else if (Math.abs(dif) < 0.4 && sem.total >= 3)
+      msg.push('La báscula está plana, pero si el objetivo es ganar músculo eso es el resultado esperado, no un frenazo.');
+  }
+  return msg.join(' ');
+}
+
+function segFicha() {
+  var t = segTocaHoy(), d = SEG_TIPOS[t];
+  var h = '<div class="seg-hoy"><div class="seg-hoy-tit">Hoy toca · '+d.n+'</div>';
+  if (d.ej.length) {
+    h += '<ul class="seg-ej">';
+    for (var i = 0; i < d.ej.length; i++) h += '<li>'+d.ej[i]+'</li>';
+    h += '</ul>';
+  }
+  if (d.nota) h += '<div class="seg-hoy-nota">'+d.nota+'</div>';
+  h += '<button class="seg-ok" style="width:100%;margin-top:10px" onclick="segHecho(\''+t+'\')">✓ Hecho</button>';
+  h += '</div>';
+  return h;
+}
+
+function segCuadro() {
+  var nom = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  var hoy = new Date().getDay(), i, h = '';
+  h += '<details class="seg-cuadro"><summary>Ver el cuadro de la semana entera</summary>';
+  for (i = 1; i <= 7; i++) {
+    var d = i % 7;
+    h += '<div class="seg-cf'+(d === hoy ? ' hoy' : '')+'"><span>'+nom[d]+'</span><span>'+
+         SEG_TIPOS[SEG_PLAN[d]].corto+'</span></div>';
+  }
+  h += '<div class="seg-hoy-nota" style="margin-top:10px">Cuando las repeticiones salgan '+
+       'cómodas en las cuatro series, sube peso. Cada seis semanas, una semana suave con '+
+       'la mitad de series.</div></details>';
+  return h;
+}
+
+function renderSeg() {
+  var otra = (CFG.yo === 'A') ? 'B' : 'A';
+  var h = '<div class="seg-top"><h2>Seguimiento</h2>'+
+          '<span class="seg-yo">registras como '+nombreDe(CFG.yo)+'</span></div>';
+
+  h += '<div class="seg-form">';
+  h += '<div class="seg-fila"><label>Peso</label>'+
+       '<input type="number" step="0.05" inputmode="decimal" id="segPeso" placeholder="kg">'+
+       '<button class="seg-ok" onclick="segGuardarPeso()">Guardar</button></div>';
+  h += '<div class="seg-fila"><label>Sesión</label><select id="segSesion">';
+  var toca = segTocaHoy();
+  for (var t in SEG_TIPOS) h += '<option value="'+t+'"'+(t === toca ? ' selected' : '')+'>'+SEG_TIPOS[t].n+'</option>';
+  h += '</select><button class="seg-ok" onclick="segGuardarSesion()">Guardar</button></div>';
+  h += '<div class="seg-sub" style="margin:8px 0 0">Se guarda con la fecha de hoy ('+
+       segFmt(segHoy())+'). Si repites, sustituye lo anterior.</div>';
+  h += '<button class="seg-borrar" onclick="segBorrarHoy()">Borrar los registros de hoy</button>';
+  h += '</div>';
+
+  h += segFicha();
+  h += segCuadro();
+
+  h += segTarjeta(CFG.yo);
+  h += segTarjeta(otra);
+
+  h += '<div class="seg-nota">Pésate el mismo día de la semana, en ayunas y con la '+
+       'misma báscula. La gráfica solo pinta la media de 7 días: el peso de un día '+
+       'suelto no significa nada. Y si el objetivo es ganar músculo, la línea plana '+
+       'es el resultado esperado, no un fracaso.</div>';
+
+  document.getElementById('vSeg').innerHTML = h;
+}
+
+function segGuardarPeso() {
+  var el = document.getElementById('segPeso');
+  var v = parseFloat(String(el.value).replace(',', '.'));
+  if (isNaN(v) || v < 20 || v > 250) { toast('Peso no válido'); return; }
+  segPon('peso', CFG.yo, segHoy(), Math.round(v*100)/100);
+  el.value = '';
+  toast('📈 Peso guardado');
+  renderSeg();
+}
+function segHecho(tipo) {
+  segPon('sesion', CFG.yo, segHoy(), tipo);
+  toast('✓ ' + SEG_TIPOS[tipo].n);
+  renderSeg();
+}
+function segGuardarSesion() {
+  var v = document.getElementById('segSesion').value;
+  segPon('sesion', CFG.yo, segHoy(), v);
+  toast('📈 ' + SEG_TIPOS[v].n);
+  renderSeg();
+}
+/* Lápida: guarda null con su marca de tiempo en vez de borrar la clave.
+   Una clave ausente no tiene fecha con la que comparar y el otro móvil la
+   resucitaría en el siguiente sondeo. */
+function segBorrarHoy() {
+  var f = segHoy();
+  segPon('peso',   CFG.yo, f, null);
+  segPon('sesion', CFG.yo, f, null);
+  toast('Registros de hoy borrados');
+  renderSeg();
+}
+
 // ── NAVEGACIÓN / VARIOS ─────────────────────────────────────
 function nav(v) {
   document.getElementById('vMenu').className     = 'vista'+(v==='menu'     ?' on':'');
   document.getElementById('vCompra').className   = 'vista'+(v==='compra'   ?' on':'');
   document.getElementById('vRecetario').className= 'vista'+(v==='recetario'?' on':'');
-  document.getElementById('tabs').style.display  = v==='menu'?'flex':'none';
+  document.getElementById('vSeg').className      = 'vista'+(v==='seg'      ?' on':'');
+  document.getElementById('tabs').style.display  = v==='menu'?'grid':'none';
   document.getElementById('btnM').className = 'hbtn'+(v==='menu'     ?' on':'');
   document.getElementById('btnC').className = 'hbtn'+(v==='compra'   ?' on':'');
   document.getElementById('btnR').className = 'hbtn'+(v==='recetario'?' on':'');
+  document.getElementById('btnS').className = 'hbtn'+(v==='seg'      ?' on':'');
   document.getElementById('fab').className  = v==='menu'?'fab':'fab fab-hidden';
+  if (v === 'seg') renderSeg();
 }
 function toast(msg) {
   var t = document.getElementById('toast');
@@ -1735,6 +2283,7 @@ function repintarTodo() {
     ? '🔀 Nueva semana de ensaladas' : '🔀 Nueva semana';
   renderTabs(); renderDia(diaAct); renderCompra();
   renderFiltros(); renderRecetario();
+  if (document.getElementById('vSeg').className.indexOf('on') !== -1) renderSeg();
 }
 
 // ── INIT ────────────────────────────────────────────────────
